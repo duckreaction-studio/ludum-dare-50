@@ -1,0 +1,42 @@
+.top-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    flex-direction: row;
+}
+
+.top-container__left {
+    flex-grow: 1;
+    align-items: flex-start;
+}
+
+.top-container__center {
+    flex-grow: 1;
+    align-items: center;
+}
+
+.top-container__right {
+    flex-grow: 1;
+    align-items: flex-end;
+}
+
+.top-container > .unity-group-box {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}

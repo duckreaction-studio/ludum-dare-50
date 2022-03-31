@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/header.uss?fileID=7433441132597879392&amp;guid=cacbc56b2f46f5443a23ed49be39d6db&amp;type=3#header" />
+    <ui:GroupBox name="topContainer" class="top-container">
+        <ui:GroupBox name="left" class="top-container__left">
+            <ui:Button text="Mute" display-tooltip-when-elided="true" />
+        </ui:GroupBox>
+        <ui:GroupBox name="center" class="top-container__center top-container__right" />
+        <ui:GroupBox name="right" style="flex-grow: 1; align-items: flex-end;">
+            <ui:Button text="Quit" display-tooltip-when-elided="true" />
+        </ui:GroupBox>
+    </ui:GroupBox>
+</ui:UXML>
