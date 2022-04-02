@@ -13,20 +13,7 @@ namespace Enemies
             return previousPosition;
         }
 
-        protected override Chessboard.Position GetRandomForwardPositionFrom(Chessboard.Position previousPosition)
-        {
-            List<Chessboard.Position> forwardPositionList = GetAllForwardPositionFrom(previousPosition);
-            forwardPositionList.Shuffle();
-            foreach (var position in forwardPositionList)
-            {
-                if (position.IsValid())
-                    return position;
-            }
-
-            return new();
-        }
-
-        private static List<Chessboard.Position> GetAllForwardPositionFrom(Chessboard.Position currentPosition)
+        protected override List<Chessboard.Position> GetAllForwardPositionFrom(Chessboard.Position currentPosition)
         {
             return new()
             {

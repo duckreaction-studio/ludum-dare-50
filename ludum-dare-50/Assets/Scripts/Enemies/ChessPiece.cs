@@ -102,10 +102,36 @@ namespace Enemies
 
         protected virtual Chessboard.Position GetRandomBackwardPositionFrom(Chessboard.Position previousPosition)
         {
-            throw new NotImplementedException();
+            List<Chessboard.Position> forwardPositionList = GetAllBackwardPositionFrom(previousPosition);
+            forwardPositionList.Shuffle();
+            foreach (var position in forwardPositionList)
+            {
+                if (position.IsValid())
+                    return position;
+            }
+
+            return new();
         }
 
         protected virtual Chessboard.Position GetRandomForwardPositionFrom(Chessboard.Position previousPosition)
+        {
+            List<Chessboard.Position> forwardPositionList = GetAllForwardPositionFrom(previousPosition);
+            forwardPositionList.Shuffle();
+            foreach (var position in forwardPositionList)
+            {
+                if (position.IsValid())
+                    return position;
+            }
+
+            return new();
+        }
+
+        protected virtual List<Chessboard.Position> GetAllBackwardPositionFrom(Chessboard.Position previousPosition)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual List<Chessboard.Position> GetAllForwardPositionFrom(Chessboard.Position previousPosition)
         {
             throw new NotImplementedException();
         }
@@ -114,9 +140,13 @@ namespace Enemies
         {
             if (_isInited)
             {
-                Gizmos.color = Color.red;
-                Gizmos.DrawCube(_chessboard.GetSquareWorldPosition(CurrentTrajectory.Positions.Last()),
-                    Vector3.one * 0.2f);
+                for (var i = 0; i < _trajectories.Count; i++)
+                {
+                    var trajectory = _trajectories[i];
+                    Gizmos.color = i == _trajectoryIndex ? Color.green : Color.red;
+                    Gizmos.DrawCube(_chessboard.GetSquareWorldPosition(trajectory.Positions.Last()),
+                        Vector3.one * 0.2f);
+                }
             }
         }
 
