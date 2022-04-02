@@ -1439,6 +1439,7 @@ GameObject:
   - component: {fileID: 748217711}
   - component: {fileID: 748217710}
   - component: {fileID: 748217709}
+  - component: {fileID: 748217714}
   m_Layer: 0
   m_Name: Queen
   m_TagString: Untagged
@@ -2589,13 +2590,34 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &748217714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748217707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402dac79339cccd4e83710cea3a27ac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startPositionList:
+  - d8
+  - c5
+  - g6
+  _rangeStepBackward: {x: 0, y: 2}
+  _rangeStepForward: {x: 2, y: 4}
+  _rangeMoveDuration: {x: 0.2, y: 0.6}
+  _rangeWaitDuration: {x: 0.2, y: 3}
+  _trajectoryCount: 4
 --- !u!43 &961035607
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31678
+  m_Name: pb_Mesh35964
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2877,7 +2899,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31756
+  m_Name: pb_Mesh36042
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6546,7 +6568,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31770
+  m_Name: pb_Mesh36056
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7000,6 +7022,7 @@ GameObject:
   - component: {fileID: 1621784257}
   - component: {fileID: 1621784256}
   - component: {fileID: 1621784255}
+  - component: {fileID: 1621784260}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Untagged
@@ -8150,6 +8173,28 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &1621784260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621784253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8acb884ca102c3946acd1ff4fd388047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startPositionList:
+  - b8
+  - g8
+  - d7
+  - e7
+  _rangeStepBackward: {x: 0, y: 2}
+  _rangeStepForward: {x: 2, y: 4}
+  _rangeMoveDuration: {x: 0.3, y: 0.6}
+  _rangeWaitDuration: {x: 0.3, y: 3}
+  _trajectoryCount: 4
 --- !u!1 &1622161605
 GameObject:
   m_ObjectHideFlags: 0
