@@ -25,9 +25,28 @@ namespace Enemies
             }
         }
 
-        private Vector3 GetSquareWorldPosition(int column, int row)
+        public Vector3 GetSquareWorldPosition(string squareName)
         {
+            if (squareName.Length != 2)
+                throw new InvalidChessboardPosition();
+            squareName = squareName.ToUpper();
+            return GetSquareWorldPosition(squareName[0] - 'A', squareName[1] - '1');
+        }
+
+        public Vector3 GetSquareWorldPosition(int column, int row)
+        {
+            EnsurePositionIsValid(column, row);
             return transform.position + Vector3.right * _squareSize * column + Vector3.forward * _squareSize * row;
         }
+
+        private static void EnsurePositionIsValid(int column, int row)
+        {
+            if (column < 0 || row < 0 || column >= size || row >= size)
+                throw new InvalidChessboardPosition();
+        }
+    }
+
+    public class InvalidChessboardPosition : Exception
+    {
     }
 }
