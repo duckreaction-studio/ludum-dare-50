@@ -4,10 +4,9 @@ using UnityEngine;
 
 public enum GameEventType
 {
-    TriggerReactDoAction,
-    TriggerReactDoReplay,
     Win,
     Restart,
     Reset,
-    PlayerThrowBall
+    PlayerHitEnemy,
+    PlayerShot
 }
