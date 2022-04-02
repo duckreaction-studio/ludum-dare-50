@@ -37,6 +37,7 @@ namespace Enemies
         {
             public int column;
             public int row;
+            public static readonly Position Invalid = new(-1, -1);
 
             public static Position CreateFromName(string squareName)
             {

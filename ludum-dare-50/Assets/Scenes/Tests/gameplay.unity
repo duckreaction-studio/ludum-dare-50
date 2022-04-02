@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 726044979}
   - component: {fileID: 726044978}
   - component: {fileID: 726044977}
+  - component: {fileID: 726044982}
   m_Layer: 0
   m_Name: Bishop
   m_TagString: Untagged
@@ -1402,6 +1403,28 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &726044982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726044975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efaa7a672eb7b8c4f9d5ceea890a5e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startPositionList:
+  - c8
+  - f8
+  - e6
+  - d6
+  _rangeStepBackward: {x: 1, y: 3}
+  _rangeStepForward: {x: 1, y: 3}
+  _rangeMoveDuration: {x: 0.2, y: 0.5}
+  _rangeWaitDuration: {x: 0.2, y: 3}
+  _trajectoryCount: 4
 --- !u!1 &748217707
 GameObject:
   m_ObjectHideFlags: 0
@@ -6359,7 +6382,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31664
+  m_Name: pb_Mesh35950
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

@@ -4,6 +4,7 @@ using System.Linq;
 using DG.Tweening;
 using DuckReaction.Common;
 using DuckReaction.Common.Container;
+using ModestTree;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
@@ -24,7 +25,7 @@ namespace Enemies
         private Vector2Int _rangeStepForward = new(2, 4);
 
         [SerializeField] [MinMaxSlider(0, 2, true)] [Tooltip("Speed for one square move")]
-        private Vector2 _rangeMoveDuration = new(0.2f, 2f);
+        private Vector2 _rangeMoveDuration = new(0.2f, 0.6f);
 
         [SerializeField] [MinMaxSlider(0, 5, true)]
         private Vector2 _rangeWaitDuration = new(0.2f, 3f);
@@ -35,6 +36,7 @@ namespace Enemies
         private int _trajectoryIndex;
         private bool _isInitialized = false;
         Chessboard.Position _startPosition;
+        Sequence _sequence;
 
         private Trajectory CurrentTrajectory => _trajectories[_trajectoryIndex];
 
@@ -46,6 +48,7 @@ namespace Enemies
         [ContextMenu("Init")]
         void Init()
         {
+            _sequence?.Kill();
             InitRandomTrajectories();
             ChooseRandomTrajectory();
             transform.position = _chessboard.GetSquareWorldPosition(CurrentTrajectory.Positions.First());
@@ -55,7 +58,8 @@ namespace Enemies
         [ContextMenu("Start move")]
         public void StartMove()
         {
-            var sequence = DOTween.Sequence();
+            _sequence?.Kill();
+            _sequence = DOTween.Sequence();
             for (int i = 1; i < CurrentTrajectory.Length; i++)
             {
                 var previousPosition = CurrentTrajectory.Positions[i - 1];
@@ -63,12 +67,12 @@ namespace Enemies
                 var worldPosition = _chessboard.GetSquareWorldPosition(position);
                 var distance = (worldPosition - _chessboard.GetSquareWorldPosition(previousPosition)).magnitude;
 
-                sequence.Join(transform.DOMove(worldPosition, distance * _rangeMoveDuration.GetRandom())
+                _sequence.Join(transform.DOMove(worldPosition, distance * _rangeMoveDuration.GetRandom())
                     .SetEase(Ease.InOutCubic));
-                sequence.AppendInterval(_rangeWaitDuration.GetRandom());
+                _sequence.AppendInterval(_rangeWaitDuration.GetRandom());
             }
 
-            sequence.Play();
+            _sequence.Play();
         }
 
         void ChooseRandomTrajectory()
@@ -126,28 +130,28 @@ namespace Enemies
 
         protected virtual Chessboard.Position GetRandomBackwardPositionFrom(Chessboard.Position previousPosition)
         {
-            var forwardPositionList = GetAllBackwardPositionFrom(previousPosition);
-            forwardPositionList.Shuffle();
-            foreach (var position in forwardPositionList)
-            {
-                if (position.IsValid())
-                    return position;
-            }
-
-            return new();
+            var positionList = GetAllBackwardPositionFrom(previousPosition);
+            positionList.Shuffle();
+            return ShuffleAndGetFirstValidPosition(positionList);
         }
 
         protected virtual Chessboard.Position GetRandomForwardPositionFrom(Chessboard.Position previousPosition)
         {
-            var forwardPositionList = GetAllForwardPositionFrom(previousPosition);
-            forwardPositionList.Shuffle();
-            foreach (var position in forwardPositionList)
+            var positionList = GetAllForwardPositionFrom(previousPosition);
+            return ShuffleAndGetFirstValidPosition(positionList);
+        }
+
+        static Chessboard.Position ShuffleAndGetFirstValidPosition(List<Chessboard.Position> positionList)
+        {
+            if (positionList.IsEmpty()) return Chessboard.Position.Invalid;
+            positionList.Shuffle();
+            foreach (var position in positionList)
             {
                 if (position.IsValid())
                     return position;
             }
 
-            return new();
+            return Chessboard.Position.Invalid;
         }
 
         protected virtual List<Chessboard.Position> GetAllBackwardPositionFrom(Chessboard.Position previousPosition)
