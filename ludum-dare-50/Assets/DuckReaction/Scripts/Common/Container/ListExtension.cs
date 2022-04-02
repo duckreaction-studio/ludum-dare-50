@@ -27,5 +27,21 @@ namespace DuckReaction.Common.Container
         {
             return list[Random.Range(0, list.Count)];
         }
+
+        public static void Shuffle<T>(this IList<T> list, int shuffleCount = -1)
+        {
+            if (list.Count == 0)
+                return;
+            if (shuffleCount < 0)
+                shuffleCount = list.Count;
+            while (shuffleCount > 1)
+            {
+                --shuffleCount;
+                int startIndex = Random.Range(0, list.Count);
+                int endIndex = Random.Range(0, list.Count);
+                // Swap
+                (list[startIndex], list[endIndex]) = (list[endIndex], list[startIndex]);
+            }
+        }
     }
 }

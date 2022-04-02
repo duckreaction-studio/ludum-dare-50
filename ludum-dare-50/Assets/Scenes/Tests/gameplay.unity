@@ -6259,13 +6259,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1265987116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af16185a0ffb243479218de0a9220234, type: 3}
+  m_Script: {fileID: 11500000, guid: c378b6fdc9457ef4c9d1e8eeed6b8839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _startPositionList:
+  - a7
   - b7
   - c7
   - d7
+  - e7
+  - f7
+  - g7
+  - g7
+  _rangeStepBackward: {x: 0, y: 0}
+  _rangeStepForward: {x: 2, y: 4}
+  _rangeMoveDuration: {x: 0.2, y: 2}
+  _rangeWaitDuration: {x: 0.2, y: 2}
+  _trajectoryCount: 4
 --- !u!1 &1283831344
 GameObject:
   m_ObjectHideFlags: 0
@@ -9323,7 +9333,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29178
+  m_Name: pb_Mesh31718
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
