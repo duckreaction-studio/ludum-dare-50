@@ -8,5 +8,10 @@ namespace DuckReaction.Common
         {
             return Random.Range(vector.x, vector.y);
         }
+
+        public static float GetRandom(this Vector2 vector2)
+        {
+            return Random.Range(vector2.x, vector2.y);
+        }
     }
 }
