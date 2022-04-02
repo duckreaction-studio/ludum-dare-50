@@ -18,16 +18,62 @@ namespace Enemies
             {
                 for (var row = 0; row < size; row++)
                 {
-                    var position = GetSquareWorldPosition(column, row);
+                    var position = GetSquareWorldPosition(new Position(column, row));
                     Gizmos.color = Color.blue;
                     Gizmos.DrawLine(position, position + Vector3.up * _gizmoLineLength);
                 }
             }
         }
 
-        private Vector3 GetSquareWorldPosition(int column, int row)
+        public Vector3 GetSquareWorldPosition(string squareName)
         {
-            return transform.position + Vector3.right * _squareSize * column + Vector3.forward * _squareSize * row;
+            var squarePosition = Position.CreateFromName(squareName);
+            return GetSquareWorldPosition(squarePosition);
         }
+
+        public Vector3 GetSquareWorldPosition(Position position)
+        {
+            if (!position.IsValid())
+                throw new InvalidChessboardPosition();
+            return transform.position + Vector3.right * _squareSize * position.column +
+                   Vector3.forward * _squareSize * position.row;
+        }
+
+        public struct Position
+        {
+            public int column;
+            public int row;
+
+            public static Position CreateFromName(string squareName)
+            {
+                if (squareName.Length != 2)
+                    throw new InvalidChessboardPosition();
+                squareName = squareName.ToUpper();
+                var result = new Position(squareName[0] - 'A', squareName[1] - '1');
+                if (!result.IsValid())
+                    throw new InvalidChessboardPosition();
+                return result;
+            }
+
+            public Position(int column, int row)
+            {
+                this.column = column;
+                this.row = row;
+            }
+
+            public bool IsValid()
+            {
+                return column >= 0 && row >= 0 && column < size && row < size;
+            }
+
+            public static Position operator +(Position a, Position b)
+            {
+                return new Position(a.column + b.column, a.row + b.row);
+            }
+        }
+    }
+
+    public class InvalidChessboardPosition : Exception
+    {
     }
 }
