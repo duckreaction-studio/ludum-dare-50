@@ -1,7 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using DuckReaction.Common;
 using DuckReaction.Common.Container;
 using Sirenix.OdinInspector;
@@ -23,11 +23,11 @@ namespace Enemies
         [SerializeField] [MinMaxSlider(0, 10, true)]
         private Vector2Int _rangeStepForward = new(2, 4);
 
-        [SerializeField] [MinMaxSlider(0, 5, true)]
+        [SerializeField] [MinMaxSlider(0, 5, true)] [Tooltip("Speed for one square move")]
         private Vector2 _rangeMoveDuration = new(0.2f, 2f);
 
         [SerializeField] [MinMaxSlider(0, 5, true)]
-        private Vector2 _rangeWaitDuration = new(0.2f, 2f);
+        private Vector2 _rangeWaitDuration = new(0.2f, 3f);
 
         [SerializeField] private int _trajectoryCount = 4;
 
@@ -46,7 +46,7 @@ namespace Enemies
         }
 
         [ContextMenu("Init")]
-        private void Init()
+        void Init()
         {
             InitRandomTrajectories();
             ChooseRandomTrajectory();
@@ -54,19 +54,38 @@ namespace Enemies
             _isInited = true;
         }
 
-        private void ChooseRandomTrajectory()
+        [ContextMenu("Start move")]
+        public void StartMove()
+        {
+            var sequence = DOTween.Sequence();
+            for (int i = 1; i < CurrentTrajectory.Length; i++)
+            {
+                var previousPosition = CurrentTrajectory.Positions[i - 1];
+                var position = CurrentTrajectory.Positions[i];
+                var worldPosition = _chessboard.GetSquareWorldPosition(position);
+                var distance = (worldPosition - _chessboard.GetSquareWorldPosition(previousPosition)).magnitude;
+
+                sequence.Join(transform.DOMove(worldPosition, distance * _rangeMoveDuration.GetRandom())
+                    .SetEase(Ease.InOutCubic));
+                sequence.AppendInterval(_rangeWaitDuration.GetRandom());
+            }
+
+            sequence.Play();
+        }
+
+        void ChooseRandomTrajectory()
         {
             _trajectoryIndex = Random.Range(0, _trajectories.Count);
         }
 
-        private void InitRandomTrajectories()
+        void InitRandomTrajectories()
         {
             _trajectories = new(_trajectoryCount);
             for (int i = 0; i < _trajectoryCount; i++)
                 _trajectories.Add(CreateRandomTrajectory());
         }
 
-        private Trajectory CreateRandomTrajectory()
+        Trajectory CreateRandomTrajectory()
         {
             List<int> steps = new();
             int stepBackwardCount = _rangeStepBackward.GetRandom();
@@ -95,7 +114,7 @@ namespace Enemies
             return result;
         }
 
-        private Chessboard.Position GetRandomStartPosition()
+        Chessboard.Position GetRandomStartPosition()
         {
             return Chessboard.Position.CreateFromName(_startPositionList.GetRandom());
         }
@@ -136,7 +155,7 @@ namespace Enemies
             throw new NotImplementedException();
         }
 
-        private void OnDrawGizmosSelected()
+        void OnDrawGizmosSelected()
         {
             if (_isInited)
             {
@@ -150,10 +169,12 @@ namespace Enemies
             }
         }
 
-        private struct Trajectory
+        struct Trajectory
         {
             public List<Chessboard.Position> Positions;
             public int CurrentIndex;
+
+            public int Length => Positions.Count;
         }
     }
 }
