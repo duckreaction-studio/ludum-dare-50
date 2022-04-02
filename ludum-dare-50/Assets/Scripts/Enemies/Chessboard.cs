@@ -25,12 +25,6 @@ namespace Enemies
             }
         }
 
-        public Vector3 GetSquareWorldPosition(string squareName)
-        {
-            var squarePosition = Position.CreateFromName(squareName);
-            return GetSquareWorldPosition(squarePosition);
-        }
-
         public Vector3 GetSquareWorldPosition(Position position)
         {
             if (!position.IsValid())

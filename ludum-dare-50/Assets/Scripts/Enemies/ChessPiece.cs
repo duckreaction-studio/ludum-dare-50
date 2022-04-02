@@ -23,7 +23,7 @@ namespace Enemies
         [SerializeField] [MinMaxSlider(0, 10, true)]
         private Vector2Int _rangeStepForward = new(2, 4);
 
-        [SerializeField] [MinMaxSlider(0, 5, true)] [Tooltip("Speed for one square move")]
+        [SerializeField] [MinMaxSlider(0, 2, true)] [Tooltip("Speed for one square move")]
         private Vector2 _rangeMoveDuration = new(0.2f, 2f);
 
         [SerializeField] [MinMaxSlider(0, 5, true)]
@@ -33,12 +33,10 @@ namespace Enemies
 
         private List<Trajectory> _trajectories;
         private int _trajectoryIndex;
-        private bool _isInited = false;
+        private bool _isInitialized = false;
+        Chessboard.Position _startPosition;
 
-        private Trajectory CurrentTrajectory
-        {
-            get { return _trajectories[_trajectoryIndex]; }
-        }
+        private Trajectory CurrentTrajectory => _trajectories[_trajectoryIndex];
 
         void Start()
         {
@@ -51,7 +49,7 @@ namespace Enemies
             InitRandomTrajectories();
             ChooseRandomTrajectory();
             transform.position = _chessboard.GetSquareWorldPosition(CurrentTrajectory.Positions.First());
-            _isInited = true;
+            _isInitialized = true;
         }
 
         [ContextMenu("Start move")]
@@ -80,6 +78,7 @@ namespace Enemies
 
         void InitRandomTrajectories()
         {
+            _startPosition = GetRandomStartPosition();
             _trajectories = new(_trajectoryCount);
             for (int i = 0; i < _trajectoryCount; i++)
                 _trajectories.Add(CreateRandomTrajectory());
@@ -87,31 +86,37 @@ namespace Enemies
 
         Trajectory CreateRandomTrajectory()
         {
+            var steps = CreateRandomSteps();
+            var result = new Trajectory
+            {
+                Positions = new() {_startPosition}
+            };
+
+            foreach (var step in steps)
+                AppendRandomPositionIntoTrajectory(result, step);
+
+            return result;
+        }
+
+        private void AppendRandomPositionIntoTrajectory(Trajectory trajectory, int step)
+        {
+            var previousPosition = trajectory.Positions.Last();
+            var nextPosition = step < 0
+                ? GetRandomBackwardPositionFrom(previousPosition)
+                : GetRandomForwardPositionFrom(previousPosition);
+            if (nextPosition.IsValid())
+                trajectory.Positions.Add(nextPosition);
+        }
+
+        private List<int> CreateRandomSteps()
+        {
             List<int> steps = new();
-            int stepBackwardCount = _rangeStepBackward.GetRandom();
-            int stepForwardCount = _rangeStepForward.GetRandom();
+            var stepBackwardCount = _rangeStepBackward.GetRandom();
+            var stepForwardCount = _rangeStepForward.GetRandom();
             steps.AddRange(Enumerable.Repeat(-1, stepBackwardCount));
             steps.AddRange(Enumerable.Repeat(1, stepForwardCount));
             steps.Shuffle();
-
-            var result = new Trajectory();
-            result.Positions = new();
-            result.Positions.Add(GetRandomStartPosition());
-
-            for (var i = 0; i < steps.Count; i++)
-            {
-                var step = steps[i];
-                var previousPosition = result.Positions.Last();
-                Chessboard.Position nextPosition;
-                if (step < 0)
-                    nextPosition = GetRandomBackwardPositionFrom(previousPosition);
-                else
-                    nextPosition = GetRandomForwardPositionFrom(previousPosition);
-                if (nextPosition.IsValid())
-                    result.Positions.Add(nextPosition);
-            }
-
-            return result;
+            return steps;
         }
 
         Chessboard.Position GetRandomStartPosition()
@@ -121,7 +126,7 @@ namespace Enemies
 
         protected virtual Chessboard.Position GetRandomBackwardPositionFrom(Chessboard.Position previousPosition)
         {
-            List<Chessboard.Position> forwardPositionList = GetAllBackwardPositionFrom(previousPosition);
+            var forwardPositionList = GetAllBackwardPositionFrom(previousPosition);
             forwardPositionList.Shuffle();
             foreach (var position in forwardPositionList)
             {
@@ -134,7 +139,7 @@ namespace Enemies
 
         protected virtual Chessboard.Position GetRandomForwardPositionFrom(Chessboard.Position previousPosition)
         {
-            List<Chessboard.Position> forwardPositionList = GetAllForwardPositionFrom(previousPosition);
+            var forwardPositionList = GetAllForwardPositionFrom(previousPosition);
             forwardPositionList.Shuffle();
             foreach (var position in forwardPositionList)
             {
@@ -157,15 +162,13 @@ namespace Enemies
 
         void OnDrawGizmosSelected()
         {
-            if (_isInited)
+            if (!_isInitialized) return;
+            for (var i = 0; i < _trajectories.Count; i++)
             {
-                for (var i = 0; i < _trajectories.Count; i++)
-                {
-                    var trajectory = _trajectories[i];
-                    Gizmos.color = i == _trajectoryIndex ? Color.green : Color.red;
-                    Gizmos.DrawCube(_chessboard.GetSquareWorldPosition(trajectory.Positions.Last()),
-                        Vector3.one * 0.2f);
-                }
+                var trajectory = _trajectories[i];
+                Gizmos.color = i == _trajectoryIndex ? Color.green : Color.red;
+                Gizmos.DrawCube(_chessboard.GetSquareWorldPosition(trajectory.Positions.Last()),
+                    Vector3.one * 0.2f);
             }
         }
 
