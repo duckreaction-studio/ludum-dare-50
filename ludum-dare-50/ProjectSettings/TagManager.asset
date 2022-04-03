@@ -7,6 +7,8 @@ TagManager:
   - ShotCamera
   - PerfectCollider
   - LargeCollider
+  - SnapDeath
+  - SnapKillPlayer
   layers:
   - Default
   - TransparentFX
