@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DuckReaction.Common.Container
 {
-    public abstract class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
+    [Serializable]
+    public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>,
+        ISerializationCallbackReceiver
     {
-        [SerializeField, HideInInspector]
-        private List<TKey> keyData = new List<TKey>();
+        [SerializeField, HideInInspector] private List<TKey> keyData = new List<TKey>();
 
-        [SerializeField, HideInInspector]
-        private List<TValue> valueData = new List<TValue>();
+        [SerializeField, HideInInspector] private List<TValue> valueData = new List<TValue>();
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {

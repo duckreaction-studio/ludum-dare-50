@@ -14,6 +14,15 @@ namespace Enemies
 {
     public class ChessPiece : MonoBehaviour
     {
+        public enum Type
+        {
+            Queen,
+            Knight,
+            Bishop,
+            Rook,
+            Pawn
+        }
+
         [Inject] SignalBus _signalBus;
         [Inject] Chessboard _chessboard;
 
@@ -65,6 +74,8 @@ namespace Enemies
 
         void OnGameEventReceived(GameEvent gameEvent)
         {
+            if (!isActiveAndEnabled)
+                return;
             if (gameEvent.Is(GameEventType.LevelRestart))
                 Init();
             if (gameEvent.Is(GameEventType.EnemyStartAttack))

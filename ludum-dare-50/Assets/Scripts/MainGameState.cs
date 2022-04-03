@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DuckReaction.Common;
+using Enemies;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -30,6 +31,8 @@ public class MainGameState : MonoBehaviour
     [Inject] SceneService _sceneService;
     [Inject] SignalBus _signalBus;
 
+    ChessPiece.Type _currentEnemyType;
+
     void Start()
     {
         _signalBus.Subscribe<GameEvent>(OnGameEventReceived);
@@ -39,6 +42,8 @@ public class MainGameState : MonoBehaviour
     {
         if (gameEvent.Is(GameEventType.ClickNext))
             Next();
+        else if (gameEvent.Is(GameEventType.EndScreenTransition))
+            OnEndScreenTransition();
     }
 
     void Update()
@@ -64,9 +69,26 @@ public class MainGameState : MonoBehaviour
             StatePlay();
     }
 
+    [ContextMenu("Start tutorial")]
+    public void TestTutorial()
+    {
+        state = State.Tutorial;
+        _currentEnemyType = ChessPiece.Type.Pawn;
+        OnEndScreenTransition();
+    }
+
+    void OnEndScreenTransition()
+    {
+        if (state == State.Tutorial)
+        {
+            _signalBus.Fire(new GameEvent(GameEventType.PlayGame, _currentEnemyType));
+        }
+    }
+
     void StateTutorial()
     {
         state = State.Tutorial;
+        _currentEnemyType = ChessPiece.Type.Pawn;
         _sceneService.StartSceneTransition(_firstScenes, _playScenes);
     }
 

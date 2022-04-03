@@ -40,6 +40,7 @@ public class UITestShotController : MonoBehaviour
 
     void OnRestartClicked()
     {
-        _levelState.Restart();
+        // TODO fixme
+        // _levelState.Restart();
     }
 }
