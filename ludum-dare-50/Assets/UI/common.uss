@@ -56,3 +56,9 @@
     bottom: 0;
     opacity: 0;
 }
+
+.enemy-icon {
+    height: 130px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
