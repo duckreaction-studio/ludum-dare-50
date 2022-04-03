@@ -37,7 +37,7 @@ public class MainGameState : MonoBehaviour
     [Inject] SignalBus _signalBus;
 
     ChessPiece.Type _currentEnemyType;
-    Dictionary<ChessPiece.Type, int> _stars;
+    Dictionary<ChessPiece.Type, int> _stars = new();
 
     void Start()
     {
@@ -93,8 +93,16 @@ public class MainGameState : MonoBehaviour
     {
         if (state == State.Tutorial)
         {
-            _signalBus.Fire(new GameEvent(GameEventType.PlayGame, _currentEnemyType));
+            StartCoroutine(WaitSceneLoadedAndPlayGameCoroutine());
         }
+    }
+
+    IEnumerator WaitSceneLoadedAndPlayGameCoroutine()
+    {
+        // La scène vient d'être chargée, il faut attendre que tous les objets soit initialisés
+        yield return null;
+        yield return null;
+        _signalBus.Fire(new GameEvent(GameEventType.PlayGame, _currentEnemyType));
     }
 
     void StateTutorial()
@@ -119,18 +127,16 @@ public class MainGameState : MonoBehaviour
     void OnLevelWin(Score score)
     {
         var starCount = score.StarCount;
-        _stars[_currentEnemyType] = Math.Max(_stars[_currentEnemyType], starCount);
-        StateChooseEnemy();
+        _stars[_currentEnemyType] = Math.Max(_stars.GetValueOrDefault(_currentEnemyType, 0), starCount);
     }
 
     void OnLevelGameOver()
     {
         _stars.Clear();
-        StateChooseEnemy();
     }
 
     public int GetStarCount(ChessPiece.Type item2)
     {
-        return _stars[item2];
+        return _stars.GetValueOrDefault(item2, 0);
     }
 }
