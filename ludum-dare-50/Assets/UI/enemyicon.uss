@@ -76,3 +76,15 @@
 .count3 .enemy-type-icon {
     -unity-background-image-tint-color: rgb(255, 0, 0);
 }
+
+#lock {
+    opacity: 0;
+}
+
+.locked #lock {
+    opacity: 1;
+}
+
+.locked .circle, .locked .enemy-type-icon {
+    opacity: 0.2;
+}
