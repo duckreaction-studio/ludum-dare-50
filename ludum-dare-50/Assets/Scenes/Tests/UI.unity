@@ -249,6 +249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1335041012}
   - component: {fileID: 1335041013}
+  - component: {fileID: 1335041014}
   m_Layer: 0
   m_Name: ChooseEnemy
   m_TagString: Untagged
@@ -288,6 +289,18 @@ MonoBehaviour:
   sourceAsset: {fileID: 9197481963319205126, guid: fc03e6088dbb66a4289b3266dc079108,
     type: 3}
   m_SortingOrder: 0
+--- !u!114 &1335041014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335041011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed920a65d779b943ab71cd8a4886e49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1563610548
 GameObject:
   m_ObjectHideFlags: 0

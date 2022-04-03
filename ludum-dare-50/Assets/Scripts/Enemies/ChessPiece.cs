@@ -79,7 +79,7 @@ namespace Enemies
                 Init();
             if (gameEvent.Is(GameEventType.EnemyStartAttack))
                 StartMove();
-            if (gameEvent.Is(GameEventType.LevelWin))
+            if (gameEvent.Is(GameEventType.LevelWin) || gameEvent.Is(GameEventType.LevelGameOver))
                 StopMove();
         }
 
