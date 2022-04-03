@@ -58,6 +58,8 @@ public class LevelState : MonoBehaviour
     {
         var playerScore =
             _scoreSettings.CalculatePlayerScore(hitInfo.perfectHit, hitInfo.enemy.GetLowerDistanceFromDeathSquares());
+        Debug.Log(
+            "Score " + playerScore.type + " " + playerScore.perfectHit + " " + playerScore.enemyDistanceFromSquare);
         if (playerScore.type == Score.Type.Fail)
             GameOver();
         else
