@@ -2,10 +2,10 @@
     <Style src="project://database/Assets/UI/common.uss?fileID=7433441132597879392&amp;guid=29ddb51f328c60d459e798ecbe48067e&amp;type=3#common" />
     <ui:Button display-tooltip-when-elided="true" enable-rich-text="false" focusable="false" name="fullscreen-button" class="fullscreen-button" />
     <ui:GroupBox name="center-container" class="center-container title">
-        <ui:Label text="The pawn&apos;s" display-tooltip-when-elided="true" name="left-part" class="left-part tmp" />
+        <ui:Label text="the pawn&apos;s" display-tooltip-when-elided="true" name="left-part" class="left-part tmp" />
         <ui:Label text="gambit" display-tooltip-when-elided="true" name="right-part" class="right-part" />
     </ui:GroupBox>
     <ui:GroupBox name="bottom-container" style="bottom: -70%; transform-origin: bottom;">
-        <ui:Label text="CLICK TO START" display-tooltip-when-elided="true" name="subtitle" class="subtitle" />
+        <ui:Label text="click to start" display-tooltip-when-elided="true" name="subtitle" class="subtitle" />
     </ui:GroupBox>
 </ui:UXML>

@@ -9,5 +9,6 @@
             <ui:VisualElement name="star2" class="star" />
             <ui:VisualElement name="star3" class="star" />
         </ui:GroupBox>
+        <ui:Button display-tooltip-when-elided="true" style="opacity: 0; position: absolute; left: 0; top: 0; right: 0; bottom: 30px;" />
     </ui:GroupBox>
 </ui:UXML>
