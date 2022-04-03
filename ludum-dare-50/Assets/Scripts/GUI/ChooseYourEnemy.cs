@@ -29,5 +29,30 @@ namespace GUI
         {
             Debug.Log("Player choose " + type);
         }
+
+        [ContextMenu("Test one star")]
+        public void TestOneStar()
+        {
+            SetStarCount("knight", 1);
+        }
+
+        [ContextMenu("Test three stars")]
+        public void TestThreeStars()
+        {
+            SetStarCount("bishop", 3);
+        }
+
+        void SetStarCount(string className, int startCount)
+        {
+            var element = _root.Q<VisualElement>(className);
+            ClearStarCount(element);
+            element.AddToClassList("count" + startCount);
+        }
+
+        static void ClearStarCount(VisualElement element)
+        {
+            for (int i = 0; i <= 3; i++)
+                element.RemoveFromClassList("count" + i);
+        }
     }
 }
