@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DuckReaction.Common;
 using Enemies;
 using UnityEngine;
@@ -28,10 +29,15 @@ public class MainGameState : MonoBehaviour
 
     public State state { get; private set; } = State.Unknown;
 
+    public int TotalStars => _stars.Values.Sum();
+
+    public bool QueenIsLocked => TotalStars < 7;
+
     [Inject] SceneService _sceneService;
     [Inject] SignalBus _signalBus;
 
     ChessPiece.Type _currentEnemyType;
+    Dictionary<ChessPiece.Type, int> _stars;
 
     void Start()
     {
@@ -44,6 +50,14 @@ public class MainGameState : MonoBehaviour
             Next();
         else if (gameEvent.Is(GameEventType.EndScreenTransition))
             OnEndScreenTransition();
+        else if (gameEvent.Is(GameEventType.LevelAnimationEnd))
+            StateChooseEnemy();
+        else if (gameEvent.Is(GameEventType.EnemySelected))
+            StatePlay(gameEvent.GetParam<ChessPiece.Type>());
+        else if (gameEvent.Is(GameEventType.LevelGameOver))
+            OnLevelGameOver();
+        else if (gameEvent.Is(GameEventType.LevelWin))
+            OnLevelWin(gameEvent.GetParam<Score>());
     }
 
     void Update()
@@ -65,8 +79,6 @@ public class MainGameState : MonoBehaviour
     {
         if (state == State.Start)
             StateTutorial();
-        else if (state == State.EnemyIntro)
-            StatePlay();
     }
 
     [ContextMenu("Start tutorial")]
@@ -92,8 +104,33 @@ public class MainGameState : MonoBehaviour
         _sceneService.StartSceneTransition(_firstScenes, _playScenes);
     }
 
-    void StatePlay()
+    void StatePlay(ChessPiece.Type type)
     {
         state = State.Play;
+        _currentEnemyType = type;
+    }
+
+    void StateChooseEnemy()
+    {
+        state = State.ChooseEnemy;
+        _signalBus.Fire(new GameEvent(GameEventType.StartChooseEnemy));
+    }
+
+    void OnLevelWin(Score score)
+    {
+        var starCount = score.StarCount;
+        _stars[_currentEnemyType] = Math.Max(_stars[_currentEnemyType], starCount);
+        StateChooseEnemy();
+    }
+
+    void OnLevelGameOver()
+    {
+        _stars.Clear();
+        StateChooseEnemy();
+    }
+
+    public int GetStarCount(ChessPiece.Type item2)
+    {
+        return _stars[item2];
     }
 }
