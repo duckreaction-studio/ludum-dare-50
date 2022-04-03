@@ -7,6 +7,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 433837982726279041, guid: 314d0ed7567ff614db8e69387ad14c1b,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291626266945474611, guid: 314d0ed7567ff614db8e69387ad14c1b,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220812103990748569, guid: 314d0ed7567ff614db8e69387ad14c1b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d58c85f35aeaf9e46bf998a64aa702e7, type: 2}
     - target: {fileID: 8653408643743516905, guid: 314d0ed7567ff614db8e69387ad14c1b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
