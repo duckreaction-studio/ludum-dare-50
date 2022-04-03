@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Enemies;
 using ModestTree.Util;
 using UnityEngine;
@@ -13,36 +10,32 @@ public class MainSceneAnimationController : MonoBehaviour
 
     [Inject] EnemySpawner _spawner;
 
+    ChessPieceAnimationController CurrentEnemyAnimation =>
+        _spawner.CurrentEnemy.GetComponent<ChessPieceAnimationController>();
+
     [Preserve]
     [ContextMenu("Prepare targets")]
     public void PrepareTargets()
     {
-        _onSnapKill.transform.position = GetEnemySnapPosition("SpawnKill");
-        _onSnapDeath.transform.position = GetEnemySnapPosition("SpawnDeath");
+        _onSnapKill.transform.position = CurrentEnemyAnimation.snapKill.transform.position;
+        _onSnapDeath.transform.position = CurrentEnemyAnimation.snapDeath.transform.position;
     }
 
     [Preserve]
     [ContextMenu("Enable blood 1")]
     public void EnableBlood1()
     {
-        SetEnemyBloodActive("Blood1", true);
+        CurrentEnemyAnimation.SetBloodActive(0, true);
     }
 
     [Preserve]
     [ContextMenu("Enable blood 2")]
     public void EnableBlood2()
     {
-        SetEnemyBloodActive("Blood2", true);
+        CurrentEnemyAnimation.SetBloodActive(1, true);
     }
 
-    [Preserve]
-    [ContextMenu("Reset")]
-    public void Reset()
-    {
-        SetEnemyBloodActive("Blood1", false);
-        SetEnemyBloodActive("Blood2", false);
-    }
-
+/*
     void SetEnemyBloodActive(string tagName, bool active)
     {
         var target = FindChildWithTag(_spawner.CurrentEnemy, tagName);
@@ -61,4 +54,5 @@ public class MainSceneAnimationController : MonoBehaviour
         var children = root.GetComponentsInChildren<Transform>();
         return children.FirstOrDefault(x => x.CompareTag(tagName));
     }
+    */
 }
