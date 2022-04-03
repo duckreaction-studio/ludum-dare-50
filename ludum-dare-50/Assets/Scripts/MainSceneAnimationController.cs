@@ -52,6 +52,13 @@ public class MainSceneAnimationController : MonoBehaviour
     }
 
     [Preserve]
+    [ContextMenu("Trigger dead")]
+    public void TriggerDead()
+    {
+        CurrentEnemyAnimation.TriggerDead();
+    }
+
+    [Preserve]
     [ContextMenu("Move on kill snap")]
     public void MoveOnKillSnap()
     {

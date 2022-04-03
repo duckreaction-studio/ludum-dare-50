@@ -16,8 +16,11 @@ namespace Enemies
 
         [Inject] SignalBus _signalBus;
 
+        Animator _animator;
+
         void Start()
         {
+            _animator = GetComponent<Animator>();
             _signalBus.Subscribe<GameEvent>(OnGameEventReceived);
         }
 
@@ -25,6 +28,11 @@ namespace Enemies
         {
             if (gameEvent.Is(GameEventType.LevelRestart))
                 Reset();
+        }
+
+        public void TriggerDead()
+        {
+            _animator.SetTrigger("Dead");
         }
 
         public void SetBloodActive(int index, bool active)
@@ -39,6 +47,8 @@ namespace Enemies
         {
             SetBloodActive(0, false);
             SetBloodActive(1, false);
+            _animator.ResetTrigger("Dead");
+            _animator.Play("Idle", -1, 0f);
         }
     }
 }
