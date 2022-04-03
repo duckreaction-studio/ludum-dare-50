@@ -54,6 +54,10 @@ public class MainGameState : MonoBehaviour
             StateChooseEnemy();
         else if (gameEvent.Is(GameEventType.EnemySelected))
             StatePlay(gameEvent.GetParam<ChessPiece.Type>());
+        else if (gameEvent.Is(GameEventType.LevelGameOver))
+            OnLevelGameOver();
+        else if (gameEvent.Is(GameEventType.LevelWin))
+            OnLevelWin(gameEvent.GetParam<Score>());
     }
 
     void Update()
@@ -110,6 +114,19 @@ public class MainGameState : MonoBehaviour
     {
         state = State.ChooseEnemy;
         _signalBus.Fire(new GameEvent(GameEventType.StartChooseEnemy));
+    }
+
+    void OnLevelWin(Score score)
+    {
+        var starCount = score.StarCount;
+        _stars[_currentEnemyType] = Math.Max(_stars[_currentEnemyType], starCount);
+        StateChooseEnemy();
+    }
+
+    void OnLevelGameOver()
+    {
+        _stars.Clear();
+        StateChooseEnemy();
     }
 
     public int GetStarCount(ChessPiece.Type item2)
