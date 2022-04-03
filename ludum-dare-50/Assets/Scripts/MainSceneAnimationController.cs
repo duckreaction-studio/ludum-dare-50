@@ -2,11 +2,11 @@ using System;
 using DuckReaction.Common;
 using DuckReaction.Common.Container;
 using Enemies;
-using ModestTree.Util;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 using Zenject;
+using Zenject.Internal;
 
 public class MainSceneAnimationController : MonoBehaviour
 {
@@ -39,6 +39,12 @@ public class MainSceneAnimationController : MonoBehaviour
         }
     }
 
+    [Preserve]
+    public void SignalEndOfAnimation()
+    {
+        // TODO 
+    }
+
     [ContextMenu("Test perfect")]
     public void TestPerfect()
     {
@@ -51,35 +57,35 @@ public class MainSceneAnimationController : MonoBehaviour
         _director.Play();
     }
 
-    [Preserve]
+    [ModestTree.Util.Preserve]
     [ContextMenu("Trigger dead")]
     public void TriggerDead()
     {
         CurrentEnemyAnimation.TriggerDead();
     }
 
-    [Preserve]
+    [ModestTree.Util.Preserve]
     [ContextMenu("Move on kill snap")]
     public void MoveOnKillSnap()
     {
         _onSnapKill.transform.position = CurrentEnemyAnimation.snapKill.transform.position;
     }
 
-    [Preserve]
+    [ModestTree.Util.Preserve]
     [ContextMenu("Move on death snap")]
     public void MoveOnDeathSnap()
     {
         _onSnapDeath.transform.position = CurrentEnemyAnimation.snapDeath.transform.position;
     }
 
-    [Preserve]
+    [ModestTree.Util.Preserve]
     [ContextMenu("Enable blood 1")]
     public void EnableBlood1()
     {
         CurrentEnemyAnimation.SetBloodActive(0, true);
     }
 
-    [Preserve]
+    [ModestTree.Util.Preserve]
     [ContextMenu("Enable blood 2")]
     public void EnableBlood2()
     {
