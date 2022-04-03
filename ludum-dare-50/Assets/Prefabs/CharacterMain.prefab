@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1573792309165336043}
   - component: {fileID: 2772582223132138291}
   - component: {fileID: 3782912531951867006}
-  - component: {fileID: 4960211733334044384}
   m_Layer: 4
   m_Name: Aiming
   m_TagString: Untagged
@@ -26,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 999565362231177610}
-  m_LocalRotation: {x: 0.00047569445, y: -0.99707353, z: 0.076193534, w: 0.006224969}
+  m_LocalRotation: {x: -0.000091044196, y: -0.99709225, z: 0.076194964, w: -0.0011914091}
   m_LocalPosition: {x: -3.53, y: 4.72, z: 5.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -64,7 +63,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8380282, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -96,23 +95,6 @@ MonoBehaviour:
     m_FrequencyGain: 1
     m_Duration: 1
     m_NoiseOffsets: {x: 39.330353, y: 101.244354, z: 37.421112}
---- !u!114 &4960211733334044384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999565362231177610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FocusTracksTarget: 0
-  m_FocusTracking: 1
-  m_FocusTarget: {fileID: 0}
-  m_FocusOffset: 0
-  m_Profile: {fileID: 0}
 --- !u!1 &1009293039787840145
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,7 +106,6 @@ GameObject:
   - component: {fileID: 1816093822432888730}
   - component: {fileID: 2284409613418038157}
   - component: {fileID: 1168113143945569596}
-  - component: {fileID: 3149733972543421900}
   m_Layer: 4
   m_Name: Idle
   m_TagString: Untagged
@@ -139,7 +120,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009293039787840145}
-  m_LocalRotation: {x: 0.010374535, y: -0.98744994, z: 0.13941012, w: 0.07348343}
+  m_LocalRotation: {x: 0.009290968, y: -0.9879911, z: 0.13948654, w: 0.065808445}
   m_LocalPosition: {x: -2.7129998, y: 5.9, z: 5.4759994}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -177,7 +158,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8380282, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -209,23 +190,6 @@ MonoBehaviour:
     m_FrequencyGain: 1
     m_Duration: 1
     m_NoiseOffsets: {x: 822.4635, y: -440.75024, z: 108.60025}
---- !u!114 &3149733972543421900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1009293039787840145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FocusTracksTarget: 0
-  m_FocusTracking: 1
-  m_FocusTarget: {fileID: 0}
-  m_FocusOffset: 0
-  m_Profile: {fileID: 0}
 --- !u!1 &1558676988687561019
 GameObject:
   m_ObjectHideFlags: 0
