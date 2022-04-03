@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 using DuckReaction.Common;
 
@@ -9,8 +6,7 @@ namespace DuckReaction.Audio
 {
     public class AudioService : MonoBehaviour
     {
-        [Inject]
-        SignalBus _signalBus;
+        [Inject] SignalBus _signalBus;
 
         AudioSourceService[] _sourceServiceList;
 

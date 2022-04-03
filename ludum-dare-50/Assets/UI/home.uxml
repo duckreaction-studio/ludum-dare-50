@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:GroupBox name="center-container" style="position: absolute; top: 30%; left: 0; right: 0; height: 50px; margin-left: 20px; margin-right: 20px; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-direction: row; align-items: center; justify-content: center;">
+        <ui:Label text="The pawn&apos;s" display-tooltip-when-elided="true" name="left-part" style="flex-grow: 1; color: rgba(255, 255, 255, 255); -unity-text-align: upper-right;" />
+        <ui:Label text="gambit" display-tooltip-when-elided="true" name="right-part" style="flex-grow: 1; color: rgb(255, 0, 0);" />
+    </ui:GroupBox>
+    <ui:GroupBox name="bottom-container" />
+</ui:UXML>
