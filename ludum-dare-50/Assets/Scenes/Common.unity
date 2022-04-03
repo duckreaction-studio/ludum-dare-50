@@ -183,7 +183,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _parentNewObjectsUnderSceneContext: 0
-  _contractNames: []
+  _contractNames:
+  - Common
   _parentContractNames: []
 --- !u!4 &700503250
 Transform:
@@ -400,6 +401,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _firstScenes:
   - Scenes/Home
+  _playScenes:
+  - Scenes/MainScene
 --- !u!1001 &8540298861575047426
 PrefabInstance:
   m_ObjectHideFlags: 0
