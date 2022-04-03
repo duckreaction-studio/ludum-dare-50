@@ -14,5 +14,6 @@ public class CommonInstaller : MonoInstaller
         Container.DeclareSignal<GameEvent>();
         Container.Bind<SceneService>().FromComponentInHierarchy(false).AsSingle();
         Container.Bind<ScoreSettings>().FromScriptableObjectResource("ScoreSettings").AsSingle();
+        Container.Bind<MainGameState>().FromComponentInHierarchy(false).AsSingle();
     }
 }

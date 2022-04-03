@@ -10,47 +10,27 @@ using UnityEngine.UI;
 
 public class SceneService : MonoBehaviour
 {
-    [SerializeField] string[] _firstScenes = {"Scenes/Home"};
-
-    [SerializeField] Image _imageEffect;
-
-    [SerializeField] float _transitionDuration = 0.4f;
-
-    [SerializeField] Color _color;
+    [SerializeField] Camera _overlayCamera;
 
     List<string> _scenesToUnload;
     List<string> _scenesToLoad;
 
     public event EventHandler<string> SceneLoad;
 
-    void Start()
+    public void StartSceneTransition(string[] scenesToUnload, string[] scenesToLoad)
     {
-        _color.a = 1;
-        _imageEffect.color = _color;
+        _scenesToUnload = new(scenesToUnload);
+        _scenesToLoad = new(scenesToLoad);
 
-        if (SceneManager.sceneCount == 1)
-            StartSceneTransition(new string[0], _firstScenes, false);
-        else
-            TransitionEndAnimation();
+        ProcessNextScene();
     }
 
-    public void StartSceneTransition(string[] scenesToUnload, string[] scenesToLoad, bool fadeIn = true)
-    {
-        _scenesToUnload = new List<string>(scenesToUnload);
-        _scenesToLoad = new List<string>(scenesToLoad);
-
-        if (fadeIn)
-            TransitionStartAnimation();
-        else
-            ProcessNextScene();
-    }
-
-    private void OnSceneLoadedOrUnloaded(AsyncOperation op)
+    void OnSceneLoadedOrUnloaded(AsyncOperation op)
     {
         ProcessNextScene();
     }
 
-    private void ProcessNextScene()
+    void ProcessNextScene()
     {
         if (_scenesToUnload.Count == 0 && _scenesToLoad.Count == 0)
         {
@@ -66,13 +46,13 @@ public class SceneService : MonoBehaviour
         }
     }
 
-    private void UnloadNextScene()
+    void UnloadNextScene()
     {
         var scene = _scenesToUnload.Shift();
         SceneManager.UnloadSceneAsync(scene).completed += OnSceneLoadedOrUnloaded;
     }
 
-    private void LoadNextScene()
+    void LoadNextScene()
     {
         var scene = _scenesToLoad.Shift();
         SceneLoad?.Invoke(this, scene);
@@ -80,22 +60,14 @@ public class SceneService : MonoBehaviour
     }
 
     [ContextMenu("Test transition start animation")]
-    private void TransitionStartAnimation()
+    void TransitionStartAnimation()
     {
-        // TODO fix me
-        // _imageEffect.DOColor(_color, _transitionDuration).SetEase(Ease.OutCubic).onComplete += ProcessNextScene;
+        _overlayCamera.gameObject.SetActive(true);
     }
 
     [ContextMenu("Test transition end animation")]
-    private void TransitionEndAnimation()
+    void TransitionEndAnimation()
     {
-        Color color = _color;
-        color.a = 0;
-        // _imageEffect.DOColor(color, _transitionDuration).SetEase(Ease.InCubic).onComplete += OnTransitionComplete;
-    }
-
-    private void OnTransitionComplete()
-    {
-        Debug.Log("Transition complete");
+        _overlayCamera.gameObject.SetActive(false);
     }
 }
