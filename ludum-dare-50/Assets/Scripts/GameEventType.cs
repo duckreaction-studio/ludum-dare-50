@@ -13,5 +13,6 @@ public enum GameEventType
     LevelWin,
     LevelRestart,
     EnemyStartAttack,
-    EnemyEndAttack
+    EnemyEndAttack,
+    EndScreenTransition
 }

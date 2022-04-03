@@ -7,11 +7,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Zenject;
 
 public class SceneService : MonoBehaviour
 {
     [SerializeField] Camera _overlayCamera;
-
+    [Inject(Optional = true)] SignalBus _signalBus;
     List<string> _scenesToUnload;
     List<string> _scenesToLoad;
 
@@ -69,5 +70,6 @@ public class SceneService : MonoBehaviour
     void TransitionEndAnimation()
     {
         _overlayCamera.gameObject.SetActive(false);
+        _signalBus?.Fire(new GameEvent(GameEventType.EndScreenTransition));
     }
 }
