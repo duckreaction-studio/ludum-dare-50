@@ -1,0 +1,58 @@
+.center-container {
+    position: absolute;
+    top: 30%;
+    left: 0;
+    right: 0;
+    height: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-size: 36px;
+    -unity-font: url('project://database/Assets/Fonts/Cinzel-Bold.ttf?fileID=12800000&guid=8dc67993418014041be2bf2193f0b76a&type=3#Cinzel-Bold');
+    -unity-font-definition: url('project://database/Assets/Fonts/Cinzel-Bold%20SDF.asset?fileID=11400000&guid=654a2fba00bac574e88e6cb559984bf8&type=2#Cinzel-Bold SDF');
+}
+
+.left-part {
+    flex-grow: 1;
+    color: rgb(255, 255, 255);
+    padding-right: 8px;
+    -unity-text-align: upper-right;
+}
+
+.right-part {
+    flex-grow: 1;
+    color: rgb(255, 0, 0);
+    -unity-text-align: upper-left;
+}
+
+.subtitle {
+    -unity-text-align: middle-center;
+    -unity-font: url('project://database/Assets/Fonts/Staatliches-Regular.ttf?fileID=12800000&guid=82b5157d4e9dc0d45a34d2d14d51d386&type=3#Staatliches-Regular');
+    color: rgb(255, 255, 255);
+    -unity-font-definition: url('project://database/Assets/Fonts/Staatliches-Regular%20SDF.asset?fileID=11400000&guid=5dc3879d3a0a50b4cbbee83300a5ec96&type=2#Staatliches-Regular SDF');
+    letter-spacing: 8px;
+}
+
+#bottom-container .subtitle {
+    flex-grow: 1;
+}
+
+.fullscreen-button {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    opacity: 0;
+}
