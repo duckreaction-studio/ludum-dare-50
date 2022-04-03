@@ -13,6 +13,7 @@ namespace Enemies
         [SerializeField] SerializableDictionary<ChessPiece.Type, GameObject> _enemies;
 
         [Inject] SignalBus _signalBus;
+        public GameObject CurrentEnemy { get; private set; }
 
         void DisableAllEnemies()
         {
@@ -35,9 +36,9 @@ namespace Enemies
         void Spawn(ChessPiece.Type type)
         {
             DisableAllEnemies();
-            var enemy = _enemies[type];
-            enemy.transform.position = transform.position;
-            enemy.SetActive(true);
+            CurrentEnemy = _enemies[type];
+            CurrentEnemy.transform.position = transform.position;
+            CurrentEnemy.SetActive(true);
         }
     }
 }
