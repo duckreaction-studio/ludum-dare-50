@@ -838,6 +838,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 319089898292316233, guid: 19cf690a8247ed04f9c77c495331c252,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 319089898292316233, guid: 19cf690a8247ed04f9c77c495331c252,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 319089898292316233, guid: 19cf690a8247ed04f9c77c495331c252,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.13826026
+      objectReference: {fileID: 0}
     - target: {fileID: 642465735675375061, guid: 19cf690a8247ed04f9c77c495331c252,
         type: 3}
       propertyPath: m_Mesh
@@ -900,8 +915,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3360378109612801747, guid: 19cf690a8247ed04f9c77c495331c252,
         type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3360378109612801747, guid: 19cf690a8247ed04f9c77c495331c252,
+        type: 3}
       propertyPath: m_TagString
       value: Blood2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772113593535524323, guid: 19cf690a8247ed04f9c77c495331c252,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3772113593535524323, guid: 19cf690a8247ed04f9c77c495331c252,
         type: 3}
@@ -938,6 +963,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 7695839414254530451, guid: 19cf690a8247ed04f9c77c495331c252,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085745192150514851, guid: 19cf690a8247ed04f9c77c495331c252,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085745192150514851, guid: 19cf690a8247ed04f9c77c495331c252,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085745192150514851, guid: 19cf690a8247ed04f9c77c495331c252,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.23420164
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085745192150514851, guid: 19cf690a8247ed04f9c77c495331c252,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.23420155
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085745192150514851, guid: 19cf690a8247ed04f9c77c495331c252,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.66719526
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085745192150514851, guid: 19cf690a8247ed04f9c77c495331c252,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.66719544
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085745192150514851, guid: 19cf690a8247ed04f9c77c495331c252,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -218.685
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19cf690a8247ed04f9c77c495331c252, type: 3}
 --- !u!1 &1017380791870812106 stripped
@@ -970,6 +1035,22 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4199407793252893225}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &654864411863436047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6377754356400505227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fafa99187ef72854ba93d5e029891935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snapKill: {fileID: 6131155649061622916}
+  snapDeath: {fileID: 4633319066719284924}
+  _blood1: {fileID: 1017380791870812106}
+  _blood2: {fileID: 1505676949771566330}
 --- !u!114 &4406796148089506822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -991,22 +1072,6 @@ MonoBehaviour:
   _rangeMoveDuration: {x: 0.5, y: 0.6}
   _rangeWaitDuration: {x: 0.3, y: 1}
   _trajectoryCount: 2
---- !u!114 &654864411863436047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6377754356400505227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fafa99187ef72854ba93d5e029891935, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  snapKill: {fileID: 6131155649061622916}
-  snapDeath: {fileID: 4633319066719284924}
-  _blood1: {fileID: 1017380791870812106}
-  _blood2: {fileID: 1505676949771566330}
 --- !u!1001 &4580476589452368562
 PrefabInstance:
   m_ObjectHideFlags: 0
