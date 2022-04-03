@@ -42,6 +42,12 @@ namespace GUI
             SetStarCount("bishop", 3);
         }
 
+        [ContextMenu("Test unlock queen")]
+        public void TestUnlockQueen()
+        {
+            SetLockQueen(false);
+        }
+
         void SetStarCount(string className, int startCount)
         {
             var element = _root.Q<VisualElement>(className);
@@ -53,6 +59,14 @@ namespace GUI
         {
             for (int i = 0; i <= 3; i++)
                 element.RemoveFromClassList("count" + i);
+        }
+
+        void SetLockQueen(bool locked)
+        {
+            var element = _root.Q<VisualElement>("queen");
+            element.RemoveFromClassList("locked");
+            if (locked)
+                element.AddToClassList("locked");
         }
     }
 }
