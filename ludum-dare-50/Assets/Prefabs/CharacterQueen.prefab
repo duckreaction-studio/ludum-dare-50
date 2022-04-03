@@ -1535,9 +1535,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19cf690a8247ed04f9c77c495331c252, type: 3}
+--- !u!1 &1017380791870812106 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3772113593535524323, guid: 19cf690a8247ed04f9c77c495331c252,
+    type: 3}
+  m_PrefabInstance: {fileID: 4199407793252893225}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1400371783439405635 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2965714452101091434, guid: 19cf690a8247ed04f9c77c495331c252,
+    type: 3}
+  m_PrefabInstance: {fileID: 4199407793252893225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1505676949771566330 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3360378109612801747, guid: 19cf690a8247ed04f9c77c495331c252,
     type: 3}
   m_PrefabInstance: {fileID: 4199407793252893225}
   m_PrefabAsset: {fileID: 0}
@@ -1547,6 +1559,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4199407793252893225}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6377754356400505227 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7117128770765144994, guid: 19cf690a8247ed04f9c77c495331c252,
+    type: 3}
+  m_PrefabInstance: {fileID: 4199407793252893225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6645204016025852851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6377754356400505227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402dac79339cccd4e83710cea3a27ac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startPositionList:
+  - e8
+  - e4
+  - g6
+  - b7
+  - c3
+  _rangeStepBackward: {x: 6, y: 10}
+  _rangeStepForward: {x: 6, y: 10}
+  _rangeMoveDuration: {x: 0.1, y: 0.15}
+  _rangeWaitDuration: {x: 0.2, y: 0.3}
+  _trajectoryCount: 2
+--- !u!114 &2643660232061431191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6377754356400505227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fafa99187ef72854ba93d5e029891935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snapKill: {fileID: 3746636098951814443}
+  snapDeath: {fileID: 666164822209091276}
+  _blood1: {fileID: 1017380791870812106}
+  _blood2: {fileID: 1505676949771566330}
 --- !u!1001 &4209556835435571378
 PrefabInstance:
   m_ObjectHideFlags: 0
