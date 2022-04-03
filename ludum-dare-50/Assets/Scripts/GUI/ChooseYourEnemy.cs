@@ -1,23 +1,46 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DuckReaction.Common;
 using Enemies;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Zenject;
 
 namespace GUI
 {
     public class ChooseYourEnemy : MonoBehaviour
     {
+        [Inject(Optional = true)] MainGameState _gameState;
+        [Inject(Optional = true)] SignalBus _signalBus;
+
+        List<Tuple<string, ChessPiece.Type>> _types = new()
+        {
+            new("rook", ChessPiece.Type.Rook),
+            new("knight", ChessPiece.Type.Knight),
+            new("bishop", ChessPiece.Type.Bishop),
+        };
+
         VisualElement _root;
+        bool _queenIsLocked = true;
 
         void Start()
         {
             _root = GetComponent<UIDocument>().rootVisualElement;
-            AddButtonListener("rook", ChessPiece.Type.Rook);
-            AddButtonListener("knight", ChessPiece.Type.Knight);
-            AddButtonListener("bishop", ChessPiece.Type.Bishop);
+            foreach (var (item1, item2) in _types)
+            {
+                AddButtonListener(item1, item2);
+            }
+
             AddButtonListener("queen", ChessPiece.Type.Queen);
+
+            //  _signalBus?.Subscribe<GameEvent>(OnGameEventReceived);
         }
+
+        /*       void OnGameEventReceived(GameEvent gameEvent)
+               {
+               }
+               */
 
         void AddButtonListener(string className, ChessPiece.Type type)
         {
@@ -28,6 +51,9 @@ namespace GUI
         void PlayerChoose(ChessPiece.Type type)
         {
             Debug.Log("Player choose " + type);
+            if (type == ChessPiece.Type.Queen && _queenIsLocked)
+                return;
+            GetComponentInParent<GameUIController>().PlayerChoose(type);
         }
 
         [ContextMenu("Test one star")]
@@ -67,6 +93,20 @@ namespace GUI
             element.RemoveFromClassList("locked");
             if (locked)
                 element.AddToClassList("locked");
+            _queenIsLocked = locked;
+        }
+
+        public void Refresh()
+        {
+            if (_gameState)
+            {
+                foreach (var (item1, item2) in _types)
+                {
+                    SetStarCount(item1, _gameState.GetStarCount(item2));
+                }
+
+                SetLockQueen(_gameState.QueenIsLocked);
+            }
         }
     }
 }

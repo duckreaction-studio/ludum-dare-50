@@ -18,5 +18,8 @@ public enum GameEventType
     ClickNext,
     SpwanEnemy,
     PlayGame,
-    EnemyReady
+    EnemyReady,
+    LevelAnimationEnd,
+    StartChooseEnemy,
+    EnemySelected
 }

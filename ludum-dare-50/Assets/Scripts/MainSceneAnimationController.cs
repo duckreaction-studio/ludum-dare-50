@@ -44,7 +44,7 @@ public class MainSceneAnimationController : MonoBehaviour
     [Preserve]
     public void SignalEndOfAnimation()
     {
-        // TODO 
+        _signalBus.Fire(new GameEvent(GameEventType.LevelAnimationEnd));
     }
 
     [ContextMenu("Test perfect")]
