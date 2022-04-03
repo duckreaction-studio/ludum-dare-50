@@ -18,6 +18,11 @@ public class SceneService : MonoBehaviour
 
     public event EventHandler<string> SceneLoad;
 
+    void Awake()
+    {
+        _overlayCamera.gameObject.SetActive(false);
+    }
+
     public void StartSceneTransition(string[] scenesToUnload, string[] scenesToLoad)
     {
         _scenesToUnload = new(scenesToUnload);

@@ -1,5 +1,6 @@
 using System.Collections;
 using DuckReaction.Common;
+using Enemies;
 using Settings;
 using UnityEngine;
 using Zenject;
@@ -16,7 +17,6 @@ public class LevelState : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(StartGame());
         _signalBus.Subscribe<GameEvent>(OnReceiveGameEvent);
     }
 
@@ -30,6 +30,13 @@ public class LevelState : MonoBehaviour
         {
             StartCoroutine(OnEnemyEndAttack());
         }
+        else if (gameEvent.Is(GameEventType.PlayGame))
+            LevelStart(gameEvent.GetParam<ChessPiece.Type>());
+    }
+
+    void LevelStart(ChessPiece.Type type)
+    {
+        StartCoroutine(StartGame(type));
     }
 
     void OnPlayerShot(GameEvent gameEvent)
@@ -69,10 +76,14 @@ public class LevelState : MonoBehaviour
         _signalBus.Fire(new GameEvent(GameEventType.LevelGameOver));
     }
 
-    IEnumerator StartGame()
+    IEnumerator StartGame(ChessPiece.Type type)
     {
+        _signalBus.Fire(new GameEvent(GameEventType.SpwanEnemy, type));
+        yield return null;
+        // Wait one frame to be sure enemy is active
+        _signalBus.Fire(new GameEvent(GameEventType.LevelRestart));
         yield return new WaitForSeconds(_waitBeforeStart);
-        Debug.Log("Start level");
+        Debug.Log("Start enemy attack");
         _signalBus.Fire(new GameEvent(GameEventType.EnemyStartAttack));
     }
 
@@ -84,6 +95,7 @@ public class LevelState : MonoBehaviour
             GameOver();
     }
 
+    /*
     public void Restart()
     {
         _playerHasHitEnemy = false;
@@ -92,4 +104,5 @@ public class LevelState : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(StartGame());
     }
+    */
 }

@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
         }
     }
 
+    public bool isHolding { get; private set; }
+
     void Start()
     {
         _signalBus.Subscribe<GameEvent>(OnGameEventReceived);
@@ -46,11 +48,15 @@ public class Player : MonoBehaviour
         if (!_hasShot)
         {
             if (Input.GetMouseButtonDown(0))
+            {
+                isHolding = true;
                 _signalBus.Fire(new GameEvent(GameEventType.PlayerPrepareShot));
+            }
 
 
             if (Input.GetMouseButtonUp(0) && ShotCamera)
             {
+                isHolding = false;
                 Shot();
                 _hasShot = true;
             }

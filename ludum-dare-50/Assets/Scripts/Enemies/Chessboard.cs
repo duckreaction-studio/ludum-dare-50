@@ -11,6 +11,7 @@ namespace Enemies
 
         [SerializeField] float _squareSize = 1f;
         [SerializeField] float _gizmoLineLength = 1f;
+        [SerializeField] Vector3 _offset;
 
         void OnDrawGizmos()
         {
@@ -29,7 +30,7 @@ namespace Enemies
         {
             if (!position.IsValid())
                 throw new InvalidChessboardPosition();
-            return transform.position + Vector3.right * _squareSize * position.column +
+            return transform.position + _offset + Vector3.right * _squareSize * position.column +
                    Vector3.forward * _squareSize * position.row;
         }
 
