@@ -9,10 +9,10 @@ namespace Enemies
     {
         public static readonly int size = 8;
 
-        [SerializeField] private float _squareSize = 1f;
-        [SerializeField] private float _gizmoLineLength = 1f;
+        [SerializeField] float _squareSize = 1f;
+        [SerializeField] float _gizmoLineLength = 1f;
 
-        private void OnDrawGizmos()
+        void OnDrawGizmos()
         {
             for (var column = 0; column < size; column++)
             {

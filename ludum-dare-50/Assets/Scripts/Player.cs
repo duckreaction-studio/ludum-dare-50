@@ -1,4 +1,6 @@
+using System;
 using DuckReaction.Common;
+using Enemies;
 using UnityEngine;
 using Zenject;
 
@@ -7,6 +9,7 @@ public class Player : MonoBehaviour
     [Inject] SignalBus _signalBus;
 
     Camera _shotCamera;
+    bool _hasShot;
 
     public Camera ShotCamera
     {
@@ -21,31 +24,75 @@ public class Player : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        _signalBus.Subscribe<GameEvent>(OnGameEventReceived);
+    }
+
+    void OnGameEventReceived(GameEvent gameEvent)
+    {
+        if (gameEvent.Is(GameEventType.Reset) || gameEvent.Is(GameEventType.LevelRestart))
+            Reset();
+    }
+
+    void Reset()
+    {
+        _hasShot = false;
+        _shotCamera = null;
+    }
+
     void Update()
     {
-        if (Input.GetMouseButtonUp(0) && ShotCamera)
+        if (!_hasShot)
         {
-            var (hitEnemy, perfectHit) = TestHitEnemy();
+            if (Input.GetMouseButtonDown(0))
+                _signalBus.Fire(new GameEvent(GameEventType.PlayerPrepareShot));
 
-            _signalBus.Fire(new GameEvent(GameEventType.PlayerShot, hitEnemy));
-            if (hitEnemy)
+
+            if (Input.GetMouseButtonUp(0) && ShotCamera)
             {
-                _signalBus.Fire(new GameEvent(GameEventType.PlayerHitEnemy, perfectHit));
+                Shot();
+                _hasShot = true;
             }
         }
     }
 
-    (bool hitEnemy, bool perfectHit) TestHitEnemy()
+    void Shot()
+    {
+        var hitInfo = TestHitEnemy();
+
+        _signalBus.Fire(new GameEvent(GameEventType.PlayerShot, hitInfo));
+    }
+
+    HitInfo TestHitEnemy()
     {
         var ray = ShotCamera.ScreenPointToRay(Input.mousePosition);
         var hits = Physics.RaycastAll(ray);
-        bool hitEnemy = false, perfectHit = false;
+        HitInfo hitInfo = new(null, false);
         foreach (var hit in hits)
         {
-            perfectHit = perfectHit || hit.collider.CompareTag("PerfectCollider");
-            hitEnemy = hitEnemy || hit.collider.CompareTag("LargeCollider");
+            if (hitInfo.enemy == null &&
+                (hit.collider.CompareTag("PerfectCollider") || hit.collider.CompareTag("LargeCollider")))
+            {
+                hitInfo.enemy = hit.collider.GetComponentInParent<ChessPiece>();
+            }
+
+            hitInfo.perfectHit = hitInfo.perfectHit || hit.collider.CompareTag("PerfectCollider");
         }
 
-        return (hitEnemy, perfectHit);
+        return hitInfo;
+    }
+
+    public struct HitInfo
+    {
+        public ChessPiece enemy;
+        public bool perfectHit;
+        public bool HasHitEnemy => enemy != null;
+
+        public HitInfo(ChessPiece enemy, bool perfectHit)
+        {
+            this.enemy = enemy;
+            this.perfectHit = perfectHit;
+        }
     }
 }
