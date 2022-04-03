@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using DuckReaction.Common;
 using DuckReaction.Common.Container;
 using Enemies;
@@ -10,6 +11,7 @@ using Zenject.Internal;
 
 public class MainSceneAnimationController : MonoBehaviour
 {
+    [SerializeField] float _moveDuration = 0.25f;
     [SerializeField] GameObject _onSnapKill;
     [SerializeField] GameObject _onSnapDeath;
 
@@ -68,14 +70,14 @@ public class MainSceneAnimationController : MonoBehaviour
     [ContextMenu("Move on kill snap")]
     public void MoveOnKillSnap()
     {
-        _onSnapKill.transform.position = CurrentEnemyAnimation.snapKill.transform.position;
+        _onSnapKill.transform.DOMove(CurrentEnemyAnimation.snapKill.transform.position, _moveDuration);
     }
 
     [ModestTree.Util.Preserve]
     [ContextMenu("Move on death snap")]
     public void MoveOnDeathSnap()
     {
-        _onSnapDeath.transform.position = CurrentEnemyAnimation.snapDeath.transform.position;
+        _onSnapDeath.transform.DOMove(CurrentEnemyAnimation.snapDeath.transform.position, _moveDuration);
     }
 
     [ModestTree.Util.Preserve]
