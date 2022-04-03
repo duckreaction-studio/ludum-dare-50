@@ -47,8 +47,11 @@ namespace Enemies
         {
             SetBloodActive(0, false);
             SetBloodActive(1, false);
-            _animator.ResetTrigger("Dead");
-            _animator.Play("Idle", -1, 0f);
+            if (isActiveAndEnabled)
+            {
+                _animator.ResetTrigger("Dead");
+                _animator.Play("Idle", -1, 0f);
+            }
         }
     }
 }
