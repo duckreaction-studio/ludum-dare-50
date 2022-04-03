@@ -7,6 +7,11 @@ public enum GameEventType
     Win,
     Restart,
     Reset,
-    PlayerHitEnemy,
-    PlayerShot
+    PlayerShot,
+    PlayerPrepareShot,
+    LevelGameOver,
+    LevelWin,
+    LevelRestart,
+    EnemyStartAttack,
+    EnemyEndAttack
 }

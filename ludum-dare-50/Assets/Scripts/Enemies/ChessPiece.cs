@@ -14,41 +14,53 @@ namespace Enemies
 {
     public class ChessPiece : MonoBehaviour
     {
-        [Inject] private Chessboard _chessboard;
+        [Inject] SignalBus _signalBus;
+        [Inject] Chessboard _chessboard;
 
-        [SerializeField] private string[] _startPositionList;
-
-        [SerializeField] [MinMaxSlider(0, 10, true)]
-        private Vector2Int _rangeStepBackward = new(0, 2);
+        [SerializeField] string[] _startPositionList;
 
         [SerializeField] [MinMaxSlider(0, 10, true)]
-        private Vector2Int _rangeStepForward = new(2, 4);
+        Vector2Int _rangeStepBackward = new(0, 2);
+
+        [SerializeField] [MinMaxSlider(0, 10, true)]
+        Vector2Int _rangeStepForward = new(2, 4);
 
         [SerializeField] [MinMaxSlider(0, 2, true)] [Tooltip("Speed for one square move")]
-        private Vector2 _rangeMoveDuration = new(0.2f, 0.6f);
+        Vector2 _rangeMoveDuration = new(0.2f, 0.6f);
 
         [SerializeField] [MinMaxSlider(0, 5, true)]
-        private Vector2 _rangeWaitDuration = new(0.2f, 3f);
+        Vector2 _rangeWaitDuration = new(0.2f, 3f);
 
-        [SerializeField] private int _trajectoryCount = 4;
+        [SerializeField] int _trajectoryCount = 4;
 
-        private List<Trajectory> _trajectories;
-        private int _trajectoryIndex;
-        private bool _isInitialized = false;
+        List<Trajectory> _trajectories;
+        int _trajectoryIndex;
+        bool _isInitialized = false;
         Chessboard.Position _startPosition;
         Sequence _sequence;
 
-        private Trajectory CurrentTrajectory => _trajectories[_trajectoryIndex];
+        Trajectory CurrentTrajectory => _trajectories[_trajectoryIndex];
 
         void Start()
         {
             Init();
+            _signalBus.Subscribe<GameEvent>(OnGameEventReceived);
+        }
+
+        void OnGameEventReceived(GameEvent gameEvent)
+        {
+            if (gameEvent.Is(GameEventType.LevelRestart))
+                Init();
+            if (gameEvent.Is(GameEventType.EnemyStartAttack))
+                StartMove();
+            if (gameEvent.Is(GameEventType.LevelWin))
+                StopMove();
         }
 
         [ContextMenu("Init")]
         void Init()
         {
-            _sequence?.Kill();
+            StopMove();
             InitRandomTrajectories();
             ChooseRandomTrajectory();
             transform.position = _chessboard.GetSquareWorldPosition(CurrentTrajectory.Positions.First());
@@ -58,8 +70,21 @@ namespace Enemies
         [ContextMenu("Start move")]
         public void StartMove()
         {
+            StopMove();
+            _sequence = CreateMoveSequence();
+            _sequence.onComplete += OnMoveComplete;
+            _sequence.Play();
+            _sequence.onStepComplete += () => { Debug.Log("Step complete"); };
+        }
+
+        void StopMove()
+        {
             _sequence?.Kill();
-            _sequence = DOTween.Sequence();
+        }
+
+        Sequence CreateMoveSequence()
+        {
+            var sequence = DOTween.Sequence();
             for (int i = 1; i < CurrentTrajectory.Length; i++)
             {
                 var previousPosition = CurrentTrajectory.Positions[i - 1];
@@ -67,12 +92,18 @@ namespace Enemies
                 var worldPosition = _chessboard.GetSquareWorldPosition(position);
                 var distance = (worldPosition - _chessboard.GetSquareWorldPosition(previousPosition)).magnitude;
 
-                _sequence.Join(transform.DOMove(worldPosition, distance * _rangeMoveDuration.GetRandom())
-                    .SetEase(Ease.InOutCubic));
-                _sequence.AppendInterval(_rangeWaitDuration.GetRandom());
+                sequence.Join(transform.DOMove(worldPosition, distance * _rangeMoveDuration.GetRandom())
+                    .SetEase(Ease.InOutSine));
+                if (i < CurrentTrajectory.Length - 1)
+                    sequence.AppendInterval(_rangeWaitDuration.GetRandom());
             }
 
-            _sequence.Play();
+            return sequence;
+        }
+
+        void OnMoveComplete()
+        {
+            _signalBus.Fire(new GameEvent(GameEventType.EnemyEndAttack, this));
         }
 
         void ChooseRandomTrajectory()
@@ -102,7 +133,7 @@ namespace Enemies
             return result;
         }
 
-        private void AppendRandomPositionIntoTrajectory(Trajectory trajectory, int step)
+        void AppendRandomPositionIntoTrajectory(Trajectory trajectory, int step)
         {
             var previousPosition = trajectory.Positions.Last();
             var nextPosition = step < 0
@@ -112,7 +143,7 @@ namespace Enemies
                 trajectory.Positions.Add(nextPosition);
         }
 
-        private List<int> CreateRandomSteps()
+        List<int> CreateRandomSteps()
         {
             List<int> steps = new();
             var stepBackwardCount = _rangeStepBackward.GetRandom();
@@ -162,6 +193,12 @@ namespace Enemies
         protected virtual List<Chessboard.Position> GetAllForwardPositionFrom(Chessboard.Position previousPosition)
         {
             throw new NotImplementedException();
+        }
+
+        public float GetLowerDistanceFromDeathSquares()
+        {
+            return _trajectories.Select(t =>
+                (transform.position - _chessboard.GetSquareWorldPosition(t.Positions.Last())).magnitude).Min();
         }
 
         void OnDrawGizmosSelected()

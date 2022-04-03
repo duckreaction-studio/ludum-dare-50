@@ -13,6 +13,7 @@ namespace Tests
         {
             Debug.Log("Install test shot");
             Container.Bind<ChessPiece>().FromComponentInHierarchy(false).AsSingle();
+            Container.Bind<LevelState>().FromComponentInHierarchy(false).AsSingle();
         }
     }
 }
