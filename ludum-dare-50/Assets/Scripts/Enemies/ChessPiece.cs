@@ -42,18 +42,17 @@ namespace Enemies
 
         [SerializeField] int _trajectoryCount = 4;
 
-        List<Trajectory> _trajectories;
+        public List<Trajectory> trajectories { get; private set; };
         int _trajectoryIndex;
         bool _isInitialized;
         bool _isMoving;
         Chessboard.Position _startPosition;
         Sequence _sequence;
 
-        Trajectory CurrentTrajectory => _trajectories[_trajectoryIndex];
+        Trajectory CurrentTrajectory => trajectories[_trajectoryIndex];
 
         void Start()
         {
-            Init();
             _signalBus.Subscribe<GameEvent>(OnGameEventReceived);
         }
 
@@ -92,6 +91,7 @@ namespace Enemies
             ChooseRandomTrajectory();
             transform.position = _chessboard.GetSquareWorldPosition(CurrentTrajectory.positions.First());
             _isInitialized = true;
+            _signalBus.Fire(new GameEvent(GameEventType.EnemyReady));
         }
 
         [ContextMenu("Start move")]
@@ -143,15 +143,15 @@ namespace Enemies
 
         void ChooseRandomTrajectory()
         {
-            _trajectoryIndex = Random.Range(0, _trajectories.Count);
+            _trajectoryIndex = Random.Range(0, trajectories.Count);
         }
 
         void InitRandomTrajectories()
         {
             _startPosition = GetRandomStartPosition();
-            _trajectories = new(_trajectoryCount);
+            trajectories = new(_trajectoryCount);
             for (int i = 0; i < _trajectoryCount; i++)
-                _trajectories.Add(CreateRandomTrajectory());
+                trajectories.Add(CreateRandomTrajectory());
         }
 
         Trajectory CreateRandomTrajectory()
@@ -232,23 +232,23 @@ namespace Enemies
 
         public float GetLowerDistanceFromDeathSquares()
         {
-            return _trajectories.Select(t =>
+            return trajectories.Select(t =>
                 (transform.position - _chessboard.GetSquareWorldPosition(t.positions.Last())).magnitude).Min();
         }
 
         void OnDrawGizmosSelected()
         {
             if (!_isInitialized) return;
-            for (var i = 0; i < _trajectories.Count; i++)
+            for (var i = 0; i < trajectories.Count; i++)
             {
-                var trajectory = _trajectories[i];
+                var trajectory = trajectories[i];
                 Gizmos.color = i == _trajectoryIndex ? Color.green : Color.red;
                 Gizmos.DrawCube(_chessboard.GetSquareWorldPosition(trajectory.positions.Last()),
                     Vector3.one * 0.2f);
             }
         }
 
-        class Trajectory
+        public class Trajectory
         {
             public List<Chessboard.Position> positions;
             public int currentIndex;

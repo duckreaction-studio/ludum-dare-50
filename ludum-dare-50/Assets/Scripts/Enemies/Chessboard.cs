@@ -40,6 +40,16 @@ namespace Enemies
             public int row;
             public static readonly Position Invalid = new(-1, -1);
 
+            public string Name
+            {
+                get
+                {
+                    char firstChar = (char) ('A' + column);
+                    char secondChar = (char) ('1' + row);
+                    return "" + firstChar + secondChar;
+                }
+            }
+
             public static Position CreateFromName(string squareName)
             {
                 if (squareName.Length != 2)

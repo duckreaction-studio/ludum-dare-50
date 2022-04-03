@@ -17,5 +17,6 @@ public enum GameEventType
     EndScreenTransition,
     ClickNext,
     SpwanEnemy,
-    PlayGame
+    PlayGame,
+    EnemyReady
 }
