@@ -26,8 +26,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 999565362231177610}
-  m_LocalRotation: {x: -0.00009104171, y: -0.99709225, z: 0.076194964, w: -0.0011913775}
-  m_LocalPosition: {x: -3.5299997, y: 4.72, z: 5.9}
+  m_LocalRotation: {x: 0.00047569445, y: -0.99707353, z: 0.076193534, w: 0.006224969}
+  m_LocalPosition: {x: -3.53, y: 4.72, z: 5.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -64,7 +64,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.8380282, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -139,7 +139,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009293039787840145}
-  m_LocalRotation: {x: 0.009290967, y: -0.9879911, z: 0.13948654, w: 0.065808445}
+  m_LocalRotation: {x: 0.010374535, y: -0.98744994, z: 0.13941012, w: 0.07348343}
   m_LocalPosition: {x: -2.7129998, y: 5.9, z: 5.4759994}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -177,7 +177,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.8380282, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -13021,6 +13021,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4199407793252893225}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6377754356400505227 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7117128770765144994, guid: 19cf690a8247ed04f9c77c495331c252,
+    type: 3}
+  m_PrefabInstance: {fileID: 4199407793252893225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8893662970095606265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6377754356400505227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c20c56af943b0048beaef9e424ed18d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aimingCamera: {fileID: 2772582223132138291}
 --- !u!1001 &5764274057132549452
 PrefabInstance:
   m_ObjectHideFlags: 0
