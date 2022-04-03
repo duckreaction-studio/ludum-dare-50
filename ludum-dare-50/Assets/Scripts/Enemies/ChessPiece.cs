@@ -42,7 +42,7 @@ namespace Enemies
 
         [SerializeField] int _trajectoryCount = 4;
 
-        public List<Trajectory> trajectories { get; private set; };
+        public List<Trajectory> trajectories { get; private set; }
         int _trajectoryIndex;
         bool _isInitialized;
         bool _isMoving;

@@ -36,14 +36,23 @@ namespace Enemies
         {
             foreach (var trajectory in trajectories)
             {
-                var squareName = trajectory.positions.Last().Name.ToLower();
-                var target = GameObject.Find(squareName + "/SquareEmit");
+                var target = FindEmitter(trajectory.positions.Last());
                 if (target)
                 {
                     target.SetActive(true);
                     _emitters.Add(target);
                 }
             }
+        }
+
+        GameObject FindEmitter(Chessboard.Position position)
+        {
+            var squareName = position.Name.ToLower();
+            var target = GameObject.Find(squareName);
+            foreach (Transform child in target.transform)
+                if (child.gameObject.name == "SquareEmit")
+                    return child.gameObject;
+            return null;
         }
 
         void ClearEmitters()

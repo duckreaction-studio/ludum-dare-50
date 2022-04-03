@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8220407537238709760}
   - component: {fileID: 2569798159097622657}
+  - component: {fileID: 4077437722055296013}
   m_Layer: 0
   m_Name: Chessboard
   m_TagString: Untagged
@@ -111,6 +112,18 @@ MonoBehaviour:
   _squareSize: 2
   _gizmoLineLength: 1
   _offset: {x: -9, y: 2, z: 0}
+--- !u!114 &4077437722055296013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8220407537238709767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4bbd6cb653a37848a13d77b97c6e911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8220407535212677598
 PrefabInstance:
   m_ObjectHideFlags: 0
