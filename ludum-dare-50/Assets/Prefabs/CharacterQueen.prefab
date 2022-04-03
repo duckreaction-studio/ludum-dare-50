@@ -1493,6 +1493,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3360378109612801747, guid: 19cf690a8247ed04f9c77c495331c252,
+        type: 3}
+      propertyPath: m_TagString
+      value: Blood2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772113593535524323, guid: 19cf690a8247ed04f9c77c495331c252,
+        type: 3}
+      propertyPath: m_TagString
+      value: Blood1
+      objectReference: {fileID: 0}
     - target: {fileID: 3773768403958932409, guid: 19cf690a8247ed04f9c77c495331c252,
         type: 3}
       propertyPath: m_Controller

@@ -9,6 +9,8 @@ TagManager:
   - LargeCollider
   - SnapDeath
   - SnapKillPlayer
+  - Blood1
+  - Blood2
   layers:
   - Default
   - TransparentFX
