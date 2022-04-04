@@ -89,6 +89,12 @@ public class MainGameState : MonoBehaviour
         OnEndScreenTransition();
     }
 
+    [ContextMenu("Choose enemy")]
+    public void TestChooseEnemy()
+    {
+        StateChooseEnemy();
+    }
+
     void OnEndScreenTransition()
     {
         if (state == State.Tutorial)
@@ -116,6 +122,7 @@ public class MainGameState : MonoBehaviour
     {
         state = State.Play;
         _currentEnemyType = type;
+        _signalBus.Fire(new GameEvent(GameEventType.PlayGame, _currentEnemyType));
     }
 
     void StateChooseEnemy()

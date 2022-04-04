@@ -21,8 +21,16 @@ public class MainSceneAnimationController : MonoBehaviour
     [Inject] EnemySpawner _spawner;
     [Inject] SignalBus _signalBus;
 
-    ChessPieceAnimationController CurrentEnemyAnimation =>
-        _spawner.CurrentEnemy.GetComponent<ChessPieceAnimationController>();
+    ChessPieceAnimationController
+        CurrentEnemyAnimation
+    {
+        get
+        {
+            if (_spawner.CurrentEnemy != null)
+                _spawner.CurrentEnemy.GetComponent<ChessPieceAnimationController>();
+            return null;
+        }
+    }
 
     void Start()
     {
@@ -63,35 +71,40 @@ public class MainSceneAnimationController : MonoBehaviour
     [ContextMenu("Trigger dead")]
     public void TriggerDead()
     {
-        CurrentEnemyAnimation.TriggerDead();
+        if (CurrentEnemyAnimation != null)
+            CurrentEnemyAnimation.TriggerDead();
     }
 
     [ModestTree.Util.Preserve]
     [ContextMenu("Move on kill snap")]
     public void MoveOnKillSnap()
     {
-        _onSnapKill.transform.DOMove(CurrentEnemyAnimation.snapKill.transform.position, _moveDuration);
+        if (CurrentEnemyAnimation != null)
+            _onSnapKill.transform.DOMove(CurrentEnemyAnimation.snapKill.transform.position, _moveDuration);
     }
 
     [ModestTree.Util.Preserve]
     [ContextMenu("Move on death snap")]
     public void MoveOnDeathSnap()
     {
-        _onSnapDeath.transform.DOMove(CurrentEnemyAnimation.snapDeath.transform.position, _moveDuration);
+        if (CurrentEnemyAnimation != null)
+            _onSnapDeath.transform.DOMove(CurrentEnemyAnimation.snapDeath.transform.position, _moveDuration);
     }
 
     [ModestTree.Util.Preserve]
     [ContextMenu("Enable blood 1")]
     public void EnableBlood1()
     {
-        CurrentEnemyAnimation.SetBloodActive(0, true);
+        if (CurrentEnemyAnimation != null)
+            CurrentEnemyAnimation.SetBloodActive(0, true);
     }
 
     [ModestTree.Util.Preserve]
     [ContextMenu("Enable blood 2")]
     public void EnableBlood2()
     {
-        CurrentEnemyAnimation.SetBloodActive(1, true);
+        if (CurrentEnemyAnimation != null)
+            CurrentEnemyAnimation.SetBloodActive(1, true);
     }
 
 /*

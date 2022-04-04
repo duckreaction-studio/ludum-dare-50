@@ -14,13 +14,9 @@ namespace GUI
 
         [Inject(Optional = true)] SignalBus _signalBus;
 
-        void Awake()
-        {
-            _chooseUi.gameObject.SetActive(false);
-        }
-
         void Start()
         {
+            Hide();
             _signalBus?.Subscribe<GameEvent>(OnGameEventReceived);
         }
 
@@ -28,8 +24,16 @@ namespace GUI
         {
             if (gameEvent.Is(GameEventType.StartChooseEnemy))
                 StartChooseEnemy();
+            else if (gameEvent.Is(GameEventType.PlayGame))
+                Hide();
         }
 
+        void Hide()
+        {
+            _chooseUi.gameObject.SetActive(false);
+        }
+
+        [ContextMenu("Start choose enemy")]
         void StartChooseEnemy()
         {
             _chooseUi.gameObject.SetActive(true);
