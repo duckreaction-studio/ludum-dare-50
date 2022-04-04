@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
             }
 
 
-            if (Input.GetMouseButtonUp(0) && ShotCamera)
+            if (isHolding && Input.GetMouseButtonUp(0) && ShotCamera)
             {
                 isHolding = false;
                 Shot();
