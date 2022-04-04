@@ -1408,7 +1408,7 @@ MonoBehaviour:
   - d8
   _rangeStepBackward: {x: 0, y: 0}
   _rangeStepForward: {x: 4, y: 10}
-  _rangeMoveDuration: {x: 0.9, y: 1.4}
+  _rangeMoveDuration: {x: 0.2, y: 0.4}
   _rangeWaitDuration: {x: 0.05, y: 0.08}
   _trajectoryCount: 4
 --- !u!4 &5790631072719353436 stripped
