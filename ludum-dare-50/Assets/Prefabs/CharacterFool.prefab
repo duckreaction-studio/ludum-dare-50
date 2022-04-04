@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267775995228652358}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.8755441, y: -0.16999996, z: -1.9242849}
+  m_LocalPosition: {x: 0.41, y: -0.16999996, z: -1.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4179936445664350883}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.83, y: -0.16999996, z: -4.29}
+  m_LocalPosition: {x: -0.93, y: -0.16999996, z: -3.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1243,10 +1243,10 @@ MonoBehaviour:
   - d6
   - h7
   - e8
-  _rangeStepBackward: {x: 2, y: 5}
-  _rangeStepForward: {x: 1, y: 7}
-  _rangeMoveDuration: {x: 0.15, y: 0.2}
-  _rangeWaitDuration: {x: 0.7, y: 0.8}
+  _rangeStepBackward: {x: 3, y: 5}
+  _rangeStepForward: {x: 5, y: 7}
+  _rangeMoveDuration: {x: 0.02, y: 0.1}
+  _rangeWaitDuration: {x: 0.8, y: 1.5}
   _trajectoryCount: 4
 --- !u!114 &6798569146081027016
 MonoBehaviour:
