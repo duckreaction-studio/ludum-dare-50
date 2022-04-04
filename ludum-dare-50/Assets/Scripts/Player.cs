@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
     void Shot()
     {
         var hitInfo = TestHitEnemy();
-
+        Debug.Log("Shot " + hitInfo);
         _signalBus.Fire(new GameEvent(GameEventType.PlayerShot, hitInfo));
     }
 

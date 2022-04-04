@@ -45,3 +45,7 @@
 .count3 #star3 {
     -unity-background-image-tint-color: rgb(255, 0, 0);
 }
+
+.count3 #info {
+    color: rgb(255, 0, 0);
+}

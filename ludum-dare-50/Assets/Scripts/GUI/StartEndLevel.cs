@@ -42,7 +42,18 @@ namespace GUI
             SetScoreVisible(score.type != Score.Type.Fail);
             SetTitle("you", score.type == Score.Type.Fail ? "died" : "win");
             SetStarCount(_scoreContainer, score.StarCount);
+            SetScoreTitle(score.type);
             StartCoroutine(WaitAndSignalEndOfShowCoroutine(Type.showScore));
+        }
+
+        void SetScoreTitle(Score.Type scoreType)
+        {
+            string label = "not bad";
+            if (scoreType == Score.Type.Good)
+                label = "good";
+            else if (scoreType == Score.Type.Perfect)
+                label = "perfect";
+            _root.Q<Label>("info").text = label;
         }
 
         void SetStarCount(string className, int startCount)

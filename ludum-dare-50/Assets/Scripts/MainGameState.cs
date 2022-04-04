@@ -157,9 +157,10 @@ public class MainGameState : MonoBehaviour
 
     void OnLevelWin(Score score)
     {
+        LastScore = score;
         if (_currentEnemyType != ChessPiece.Type.Pawn)
         {
-            LastScore = score;
+            // Le pion ne compte pas dans les scores
             var starCount = score.StarCount;
             _stars[_currentEnemyType] = Math.Max(_stars.GetValueOrDefault(_currentEnemyType, 0), starCount);
         }
