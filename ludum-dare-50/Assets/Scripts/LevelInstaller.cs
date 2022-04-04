@@ -11,5 +11,6 @@ public class LevelInstaller : MonoInstaller
         Debug.Log("Install level");
         Container.Bind<Player>().FromComponentInHierarchy(false).AsSingle();
         Container.Bind<EnemySpawner>().FromComponentInHierarchy(false).AsSingle();
+        Container.Bind<LevelState>().FromComponentInHierarchy(false).AsSingle();
     }
 }

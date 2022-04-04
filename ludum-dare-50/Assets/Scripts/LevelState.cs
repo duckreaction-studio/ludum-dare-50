@@ -14,6 +14,10 @@ public class LevelState : MonoBehaviour
     [SerializeField] float _waitBeforeStart = 2f;
     bool _playerHasHitEnemy = false;
     bool _gameOver = false;
+    bool _started = false;
+    bool _playerHasShot = false;
+
+    public bool CanFire => _started && !_playerHasShot;
 
     void Start()
     {
@@ -38,11 +42,16 @@ public class LevelState : MonoBehaviour
     {
         _gameOver = false;
         _playerHasHitEnemy = false;
+        _started = false;
+        _playerHasShot = false;
         StartCoroutine(StartGame(type));
     }
 
     void OnPlayerShot(GameEvent gameEvent)
     {
+        if (!_started)
+            return;
+        _playerHasShot = true;
         var hitInfo = gameEvent.GetParam<Player.HitInfo>();
         if (hitInfo.HasHitEnemy)
         {
@@ -89,6 +98,7 @@ public class LevelState : MonoBehaviour
         yield return new WaitForSeconds(_waitBeforeStart);
         Debug.Log("Start enemy attack");
         _signalBus.Fire(new GameEvent(GameEventType.EnemyStartAttack));
+        _started = true;
     }
 
     IEnumerator OnEnemyEndAttack()
