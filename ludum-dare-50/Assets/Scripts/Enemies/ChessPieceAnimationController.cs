@@ -24,6 +24,11 @@ namespace Enemies
             _signalBus.Subscribe<GameEvent>(OnGameEventReceived);
         }
 
+        void OnEnable()
+        {
+            ResetAnimator();
+        }
+
         void OnGameEventReceived(GameEvent gameEvent)
         {
             if (gameEvent.Is(GameEventType.LevelRestart))
@@ -49,9 +54,14 @@ namespace Enemies
             SetBloodActive(1, false);
             if (isActiveAndEnabled)
             {
-                _animator.ResetTrigger("Dead");
-                _animator.Play("Idle", -1, 0f);
+                ResetAnimator();
             }
+        }
+
+        void ResetAnimator()
+        {
+            _animator.ResetTrigger("Dead");
+            _animator.Play("Idle", -1, 0f);
         }
     }
 }
