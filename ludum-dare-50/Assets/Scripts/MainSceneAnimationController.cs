@@ -27,7 +27,7 @@ public class MainSceneAnimationController : MonoBehaviour
         get
         {
             if (_spawner.CurrentEnemy != null)
-                _spawner.CurrentEnemy.GetComponent<ChessPieceAnimationController>();
+                return _spawner.CurrentEnemy.GetComponent<ChessPieceAnimationController>();
             return null;
         }
     }
