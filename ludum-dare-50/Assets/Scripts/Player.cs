@@ -7,9 +7,10 @@ using Zenject;
 public class Player : MonoBehaviour
 {
     [Inject] SignalBus _signalBus;
+    [Inject(Optional = true)] LevelState _levelState;
 
     Camera _shotCamera;
-    bool _hasShot;
+    // bool _hasShot;
 
     public Camera ShotCamera
     {
@@ -39,13 +40,13 @@ public class Player : MonoBehaviour
 
     void Reset()
     {
-        _hasShot = false;
+        //   _hasShot = false;
         _shotCamera = null;
     }
 
     void Update()
     {
-        if (!_hasShot)
+        if (_levelState == null || _levelState.CanFire)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -58,7 +59,7 @@ public class Player : MonoBehaviour
             {
                 isHolding = false;
                 Shot();
-                _hasShot = true;
+                //          _hasShot = true;
             }
         }
     }
