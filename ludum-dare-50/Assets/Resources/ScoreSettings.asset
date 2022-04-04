@@ -16,7 +16,7 @@ MonoBehaviour:
   scoreLevelSettings:
   - type: 0
     needPerfectHit: 1
-    maxDistance: 1.4
+    maxDistance: 1.55
   - type: 1
     needPerfectHit: 0
     maxDistance: 1.9
