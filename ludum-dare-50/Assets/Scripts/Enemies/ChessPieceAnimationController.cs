@@ -26,6 +26,15 @@ namespace Enemies
 
         void OnEnable()
         {
+            if (_animator)
+                StartCoroutine(ResetAnimatorCoroutine());
+        }
+
+        IEnumerator ResetAnimatorCoroutine()
+        {
+            // Work around reset model
+            ResetAnimator();
+            yield return null;
             ResetAnimator();
         }
 
