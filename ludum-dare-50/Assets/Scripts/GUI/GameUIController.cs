@@ -80,6 +80,16 @@ namespace GUI
             PlayerChoose(ChessPiece.Type.Rook);
         }
 
+        [ContextMenu("Test show score perfect")]
+        void TestShowPerfectScore()
+        {
+            SetVisibleUi(1, true);
+            _startEndLevelUi.ShowScore(new()
+            {
+                type = Score.Type.Perfect
+            });
+        }
+
         public void PlayerChoose(ChessPiece.Type type)
         {
             _currentType = type;
