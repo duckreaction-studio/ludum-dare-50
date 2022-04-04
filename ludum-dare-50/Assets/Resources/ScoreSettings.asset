@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e4f59ecc10403fa85e67046b62a4a7, type: 3}
   m_Name: ScoreSettings
   m_EditorClassIdentifier: 
-  killTimeout: 0.2
+  killTimeout: 0.15
   scoreLevelSettings:
   - type: 0
     needPerfectHit: 1
