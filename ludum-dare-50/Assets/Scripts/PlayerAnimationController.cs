@@ -12,10 +12,12 @@ public class PlayerAnimationController : MonoBehaviour
     [Inject] SignalBus _signalBus;
 
     Vector3 _startPosition;
+    Animator _animator;
 
     void Start()
     {
         _startPosition = transform.position;
+        _animator = GetComponent<Animator>();
         _signalBus.Subscribe<GameEvent>(OnGameEventReceived);
     }
 
@@ -30,6 +32,8 @@ public class PlayerAnimationController : MonoBehaviour
     void Reset()
     {
         transform.position = _startPosition;
+        if (isActiveAndEnabled)
+            _animator.Play("CharacterIdle", -1, 0f);
     }
 
     void Update()

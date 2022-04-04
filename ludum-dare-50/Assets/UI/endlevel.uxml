@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/UI/common.uss?fileID=7433441132597879392&amp;guid=29ddb51f328c60d459e798ecbe48067e&amp;type=3#common" />
     <Style src="project://database/Assets/UI/endlevel.uss?fileID=7433441132597879392&amp;guid=cd1ff7de94fd43f4b97cf118cf263795&amp;type=3#endlevel" />
     <ui:Button display-tooltip-when-elided="true" enable-rich-text="false" focusable="false" name="fullscreen-button" class="fullscreen-button" />
-    <ui:GroupBox name="center-container" class="center-container title" style="top: 20%;">
+    <ui:GroupBox name="center-container" class="center-container title" style="top: 10%;">
         <ui:Label text="you" display-tooltip-when-elided="true" name="left-part" class="left-part tmp" />
         <ui:Label text="win" display-tooltip-when-elided="true" name="right-part" class="right-part" />
     </ui:GroupBox>
