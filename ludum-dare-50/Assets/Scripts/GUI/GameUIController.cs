@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DuckReaction.Common;
 using Enemies;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Zenject;
 
 namespace GUI
@@ -12,6 +13,7 @@ namespace GUI
     {
         [SerializeField] ChooseYourEnemy _chooseUi;
         [SerializeField] StartEndLevel _startEndLevelUi;
+        [SerializeField] UIDocument _victoryUi;
 
         [Inject(Optional = true)] SignalBus _signalBus;
         [Inject(Optional = true)] MainGameState _gameState;
@@ -32,12 +34,15 @@ namespace GUI
                 StartShowScore();
             else if (gameEvent.Is(GameEventType.PlayGame))
                 SetVisibleAllUis(false);
+            else if (gameEvent.Is(GameEventType.Victory))
+                ShowVictory();
         }
 
         void SetVisibleAllUis(bool isVisible)
         {
             _chooseUi.gameObject.SetActive(isVisible);
             _startEndLevelUi.gameObject.SetActive(isVisible);
+            _victoryUi.gameObject.SetActive(isVisible);
         }
 
         void SetVisibleUi(int uiIndex, bool isVisible)
@@ -46,6 +51,8 @@ namespace GUI
                 _chooseUi.gameObject.SetActive(isVisible);
             else if (uiIndex == 1)
                 _startEndLevelUi.gameObject.SetActive(isVisible);
+            else if (uiIndex == 2)
+                _victoryUi.gameObject.SetActive(isVisible);
         }
 
         [ContextMenu("Start choose enemy")]
@@ -93,6 +100,12 @@ namespace GUI
             {
                 _signalBus?.Fire(new GameEvent(GameEventType.EndShowScore, _currentType));
             }
+        }
+
+        [ContextMenu("Show victory")]
+        public void ShowVictory()
+        {
+            SetVisibleUi(2, true);
         }
     }
 }

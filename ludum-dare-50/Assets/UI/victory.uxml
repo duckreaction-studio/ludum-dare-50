@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/common.uss?fileID=7433441132597879392&amp;guid=29ddb51f328c60d459e798ecbe48067e&amp;type=3#common" />
+    <Style src="project://database/Assets/UI/endlevel.uss?fileID=7433441132597879392&amp;guid=cd1ff7de94fd43f4b97cf118cf263795&amp;type=3#endlevel" />
+    <ui:Button display-tooltip-when-elided="true" enable-rich-text="false" focusable="false" name="fullscreen-button" class="fullscreen-button" />
+    <ui:GroupBox name="center-container" class="center-container title" style="top: 10%; height: 80px;">
+        <ui:Label text="victory" display-tooltip-when-elided="true" name="title" class="right-part" style="-unity-text-align: upper-center;" />
+    </ui:GroupBox>
+    <ui:GroupBox name="center-container2" class="center-container title" style="top: 35%; height: 80px; flex-direction: column;">
+        <ui:Label text="thank you for playing" display-tooltip-when-elided="true" name="info" class="subtitle" style="font-size: 24px; -unity-text-align: upper-center;" />
+    </ui:GroupBox>
+</ui:UXML>
