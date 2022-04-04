@@ -33,14 +33,12 @@ namespace GUI
             }
 
             AddButtonListener("queen", ChessPiece.Type.Queen);
-
-            //  _signalBus?.Subscribe<GameEvent>(OnGameEventReceived);
         }
 
-        /*       void OnGameEventReceived(GameEvent gameEvent)
-               {
-               }
-               */
+        void OnEnable()
+        {
+            Start();
+        }
 
         void AddButtonListener(string className, ChessPiece.Type type)
         {
