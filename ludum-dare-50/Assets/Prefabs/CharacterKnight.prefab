@@ -1069,8 +1069,8 @@ MonoBehaviour:
   - e4
   _rangeStepBackward: {x: 1, y: 3}
   _rangeStepForward: {x: 2, y: 5}
-  _rangeMoveDuration: {x: 0.2, y: 0.5}
-  _rangeWaitDuration: {x: 0.8, y: 1.5}
+  _rangeMoveDuration: {x: 0.1, y: 0.2}
+  _rangeWaitDuration: {x: 0.4, y: 1}
   _trajectoryCount: 2
 --- !u!1001 &4580476589452368562
 PrefabInstance:

@@ -1408,8 +1408,8 @@ MonoBehaviour:
   - d8
   _rangeStepBackward: {x: 0, y: 0}
   _rangeStepForward: {x: 5, y: 10}
-  _rangeMoveDuration: {x: 0.32538432, y: 0.53736097}
-  _rangeWaitDuration: {x: 0.1, y: 0.15}
+  _rangeMoveDuration: {x: 0.2, y: 0.21}
+  _rangeWaitDuration: {x: 0.3, y: 0.31}
   _trajectoryCount: 4
 --- !u!4 &5790631072719353436 stripped
 Transform:
