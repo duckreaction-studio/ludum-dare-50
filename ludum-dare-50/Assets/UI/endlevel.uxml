@@ -2,11 +2,19 @@
     <Style src="project://database/Assets/UI/common.uss?fileID=7433441132597879392&amp;guid=29ddb51f328c60d459e798ecbe48067e&amp;type=3#common" />
     <Style src="project://database/Assets/UI/endlevel.uss?fileID=7433441132597879392&amp;guid=cd1ff7de94fd43f4b97cf118cf263795&amp;type=3#endlevel" />
     <ui:Button display-tooltip-when-elided="true" enable-rich-text="false" focusable="false" name="fullscreen-button" class="fullscreen-button" />
-    <ui:GroupBox name="center-container" class="center-container title" style="top: 10%;">
-        <ui:Label text="you" display-tooltip-when-elided="true" name="left-part" class="left-part tmp" />
-        <ui:Label text="win" display-tooltip-when-elided="true" name="right-part" class="right-part" />
+    <ui:GroupBox name="center-container" class="center-container title" style="top: 10%; height: 80px;">
+        <ui:Label text="the" display-tooltip-when-elided="true" name="left-part" class="left-part" />
+        <ui:Label text="bishop" display-tooltip-when-elided="true" name="right-part" class="right-part" />
     </ui:GroupBox>
-    <ui:GroupBox name="bottom-container" style="bottom: -70%; transform-origin: bottom;">
+    <ui:GroupBox name="center-container2" class="center-container title" style="top: 35%; height: 80px; flex-direction: column;">
+        <ui:Label text="not bad" display-tooltip-when-elided="true" name="info" class="subtitle" style="font-size: 24px; -unity-text-align: upper-center;" />
+        <ui:GroupBox name="star-container" style="margin-left: 0; margin-right: 0; margin-top: 8px; margin-bottom: 0; flex-direction: row; align-items: center; justify-content: space-between; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; width: 80px; height: 20px;">
+            <ui:VisualElement name="star1" class="star test" />
+            <ui:VisualElement name="star2" class="star" />
+            <ui:VisualElement name="star3" class="star" />
+        </ui:GroupBox>
+    </ui:GroupBox>
+    <ui:GroupBox name="bottom-container" style="bottom: -85%; transform-origin: bottom;">
         <ui:Label text="click to skip" display-tooltip-when-elided="true" name="subtitle" class="subtitle" />
     </ui:GroupBox>
 </ui:UXML>
