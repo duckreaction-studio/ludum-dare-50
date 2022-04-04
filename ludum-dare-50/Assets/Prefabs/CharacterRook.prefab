@@ -1386,8 +1386,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafa99187ef72854ba93d5e029891935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snapKill: {fileID: 0}
-  snapDeath: {fileID: 0}
+  snapKill: {fileID: 8109843112446202679}
+  snapDeath: {fileID: 55515187884198328}
   _blood1: {fileID: 8424154220211312153}
   _blood2: {fileID: 7931913048844846377}
 --- !u!114 &665072096037111296
@@ -1408,8 +1408,8 @@ MonoBehaviour:
   - d8
   _rangeStepBackward: {x: 0, y: 0}
   _rangeStepForward: {x: 5, y: 10}
-  _rangeMoveDuration: {x: 0.2, y: 0.21}
-  _rangeWaitDuration: {x: 2, y: 2.1}
+  _rangeMoveDuration: {x: 0.1, y: 0.11}
+  _rangeWaitDuration: {x: 1, y: 1}
   _trajectoryCount: 4
 --- !u!4 &5790631072719353436 stripped
 Transform:
