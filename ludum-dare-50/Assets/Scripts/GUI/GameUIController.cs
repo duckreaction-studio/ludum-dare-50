@@ -11,12 +11,16 @@ namespace GUI
     public class GameUIController : MonoBehaviour
     {
         [SerializeField] ChooseYourEnemy _chooseUi;
+        [SerializeField] StartEndLevel _startEndLevelUi;
 
         [Inject(Optional = true)] SignalBus _signalBus;
+        [Inject(Optional = true)] MainGameState _gameState;
+
+        ChessPiece.Type _currentType;
 
         void Start()
         {
-            Hide();
+            SetVisibleAllUis(false);
             _signalBus?.Subscribe<GameEvent>(OnGameEventReceived);
         }
 
@@ -24,26 +28,71 @@ namespace GUI
         {
             if (gameEvent.Is(GameEventType.StartChooseEnemy))
                 StartChooseEnemy();
+            else if (gameEvent.Is(GameEventType.StartShowScore))
+                StartShowScore();
             else if (gameEvent.Is(GameEventType.PlayGame))
-                Hide();
+                SetVisibleAllUis(false);
         }
 
-        void Hide()
+        void SetVisibleAllUis(bool isVisible)
         {
-            _chooseUi.gameObject.SetActive(false);
+            _chooseUi.gameObject.SetActive(isVisible);
+            _startEndLevelUi.gameObject.SetActive(isVisible);
+        }
+
+        void SetVisibleUi(int uiIndex, bool isVisible)
+        {
+            if (uiIndex == 0)
+                _chooseUi.gameObject.SetActive(isVisible);
+            else if (uiIndex == 1)
+                _startEndLevelUi.gameObject.SetActive(isVisible);
         }
 
         [ContextMenu("Start choose enemy")]
         void StartChooseEnemy()
         {
-            _chooseUi.gameObject.SetActive(true);
+            SetVisibleUi(0, true);
             _chooseUi.Refresh();
+        }
+
+        [ContextMenu("Start show score")]
+        void StartShowScore()
+        {
+            SetVisibleUi(1, true);
+            _startEndLevelUi.ShowScore(_gameState == null
+                ? new()
+                {
+                    type = Score.Type.Fail
+                }
+                : _gameState.LastScore);
+        }
+
+        [ContextMenu("Test select the rook")]
+        void TestPlayerChoose()
+        {
+            PlayerChoose(ChessPiece.Type.Rook);
         }
 
         public void PlayerChoose(ChessPiece.Type type)
         {
-            // TODO afficher le nom de l'enemi
-            _signalBus.Fire(new GameEvent(GameEventType.EnemySelected, type));
+            _currentType = type;
+            SetVisibleUi(0, false);
+            SetVisibleUi(1, true);
+            _startEndLevelUi.ShowEnemyName(_currentType.ToString().ToLower());
+        }
+
+        public void EndShowTitle(StartEndLevel.Type type)
+        {
+            Debug.Log("End " + type.ToString());
+            SetVisibleAllUis(false);
+            if (type == StartEndLevel.Type.showEnemy)
+            {
+                _signalBus?.Fire(new GameEvent(GameEventType.EnemySelected, _currentType));
+            }
+            else
+            {
+                _signalBus?.Fire(new GameEvent(GameEventType.EndShowScore, _currentType));
+            }
         }
     }
 }

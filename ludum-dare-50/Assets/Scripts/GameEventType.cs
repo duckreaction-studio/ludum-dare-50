@@ -21,5 +21,8 @@ public enum GameEventType
     EnemyReady,
     LevelAnimationEnd,
     StartChooseEnemy,
-    EnemySelected
+    EnemySelected,
+    EndShowScore,
+    Victory,
+    StartShowScore
 }

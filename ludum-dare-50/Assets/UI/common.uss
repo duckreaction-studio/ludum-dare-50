@@ -17,6 +17,10 @@
     justify-content: center;
 }
 
+.hidden {
+    display: none;
+}
+
 .title {
     font-size: 36px;
     -unity-font: url('project://database/Assets/Fonts/Cinzel-Bold.ttf?fileID=12800000&guid=8dc67993418014041be2bf2193f0b76a&type=3#Cinzel-Bold');

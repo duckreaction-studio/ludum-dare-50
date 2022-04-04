@@ -21,7 +21,8 @@ public class MainGameState : MonoBehaviour
         Play,
         Win,
         GameOver,
-        Victory
+        Victory,
+        ShowScore
     }
 
     [SerializeField] string[] _firstScenes = {"Scenes/Home"};
@@ -32,6 +33,12 @@ public class MainGameState : MonoBehaviour
     public int TotalStars => _stars.Values.Sum();
 
     public bool QueenIsLocked => TotalStars < 7;
+    public bool QueenIsDead => _stars.GetValueOrDefault(ChessPiece.Type.Queen, 0) > 0;
+
+    public Score LastScore { get; private set; } = new()
+    {
+        type = Score.Type.Fail
+    };
 
     [Inject] SceneService _sceneService;
     [Inject] SignalBus _signalBus;
@@ -51,13 +58,15 @@ public class MainGameState : MonoBehaviour
         else if (gameEvent.Is(GameEventType.EndScreenTransition))
             OnEndScreenTransition();
         else if (gameEvent.Is(GameEventType.LevelAnimationEnd))
-            StateChooseEnemy();
+            StateShowScore();
         else if (gameEvent.Is(GameEventType.EnemySelected))
             StatePlay(gameEvent.GetParam<ChessPiece.Type>());
         else if (gameEvent.Is(GameEventType.LevelGameOver))
             OnLevelGameOver();
         else if (gameEvent.Is(GameEventType.LevelWin))
             OnLevelWin(gameEvent.GetParam<Score>());
+        else if (gameEvent.Is(GameEventType.EndShowScore))
+            OnEndShowScore();
     }
 
     void Update()
@@ -125,6 +134,12 @@ public class MainGameState : MonoBehaviour
         _signalBus.Fire(new GameEvent(GameEventType.PlayGame, _currentEnemyType));
     }
 
+    void StateShowScore()
+    {
+        state = State.ShowScore;
+        _signalBus.Fire(new GameEvent(GameEventType.StartShowScore));
+    }
+
     void StateChooseEnemy()
     {
         state = State.ChooseEnemy;
@@ -133,13 +148,29 @@ public class MainGameState : MonoBehaviour
 
     void OnLevelWin(Score score)
     {
+        LastScore = score;
         var starCount = score.StarCount;
         _stars[_currentEnemyType] = Math.Max(_stars.GetValueOrDefault(_currentEnemyType, 0), starCount);
     }
 
     void OnLevelGameOver()
     {
+        LastScore = new()
+        {
+            type = Score.Type.Fail
+        };
         _stars.Clear();
+    }
+
+    void OnEndShowScore()
+    {
+        if (QueenIsDead)
+        {
+            state = State.Victory;
+            _signalBus.Fire(new GameEvent(GameEventType.Victory));
+        }
+        else
+            StateChooseEnemy();
     }
 
     public int GetStarCount(ChessPiece.Type item2)
