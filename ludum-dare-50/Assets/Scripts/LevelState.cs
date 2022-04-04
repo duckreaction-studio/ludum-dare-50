@@ -36,6 +36,8 @@ public class LevelState : MonoBehaviour
 
     void LevelStart(ChessPiece.Type type)
     {
+        _gameOver = false;
+        _playerHasHitEnemy = false;
         StartCoroutine(StartGame(type));
     }
 
