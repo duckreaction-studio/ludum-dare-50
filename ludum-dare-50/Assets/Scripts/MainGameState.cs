@@ -40,6 +40,8 @@ public class MainGameState : MonoBehaviour
         type = Score.Type.Fail
     };
 
+    public bool TutorialSuccess { get; private set; }
+
     [Inject] SceneService _sceneService;
     [Inject] SignalBus _signalBus;
 
@@ -127,6 +129,13 @@ public class MainGameState : MonoBehaviour
         _sceneService.StartSceneTransition(_firstScenes, _playScenes);
     }
 
+    void ReplayTutorial()
+    {
+        state = State.Tutorial;
+        _currentEnemyType = ChessPiece.Type.Pawn;
+        _signalBus.Fire(new GameEvent(GameEventType.PlayGame, _currentEnemyType));
+    }
+
     void StatePlay(ChessPiece.Type type)
     {
         state = State.Play;
@@ -148,9 +157,16 @@ public class MainGameState : MonoBehaviour
 
     void OnLevelWin(Score score)
     {
-        LastScore = score;
-        var starCount = score.StarCount;
-        _stars[_currentEnemyType] = Math.Max(_stars.GetValueOrDefault(_currentEnemyType, 0), starCount);
+        if (_currentEnemyType != ChessPiece.Type.Pawn)
+        {
+            LastScore = score;
+            var starCount = score.StarCount;
+            _stars[_currentEnemyType] = Math.Max(_stars.GetValueOrDefault(_currentEnemyType, 0), starCount);
+        }
+        else
+        {
+            TutorialSuccess = true;
+        }
     }
 
     void OnLevelGameOver()
@@ -169,8 +185,10 @@ public class MainGameState : MonoBehaviour
             state = State.Victory;
             _signalBus.Fire(new GameEvent(GameEventType.Victory));
         }
-        else
+        else if (TutorialSuccess)
             StateChooseEnemy();
+        else
+            ReplayTutorial();
     }
 
     public int GetStarCount(ChessPiece.Type item2)
