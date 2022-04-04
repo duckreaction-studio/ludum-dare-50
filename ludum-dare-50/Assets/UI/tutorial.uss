@@ -1,0 +1,41 @@
+.tuto-container {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 100%;
+    flex-grow: 1;
+}
+
+.tuto-container-title {
+    -unity-text-align: upper-center;
+    color: rgb(255, 0, 0);
+    font-size: 16px;
+    margin-bottom: 2px;
+    -unity-text-align: upper-center;
+}
+
+.tuto-container-subtitle {
+    font-size: 12px;
+    -unity-text-align: upper-center;
+    flex-grow: 1;
+}
+
+.center-container-tuto {
+    height: 80px;
+    background-color: rgb(0, 0, 0);
+    top: 0;
+    justify-content: space-between;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
