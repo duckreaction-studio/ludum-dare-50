@@ -14,6 +14,7 @@ namespace GUI
         [SerializeField] ChooseYourEnemy _chooseUi;
         [SerializeField] StartEndLevel _startEndLevelUi;
         [SerializeField] UIDocument _victoryUi;
+        [SerializeField] UIDocument _tutorialUi;
 
         [Inject(Optional = true)] SignalBus _signalBus;
         [Inject(Optional = true)] MainGameState _gameState;
@@ -24,6 +25,11 @@ namespace GUI
         {
             SetVisibleAllUis(false);
             _signalBus?.Subscribe<GameEvent>(OnGameEventReceived);
+        }
+
+        void Update()
+        {
+            SetVisibleUi(3, _gameState != null && _gameState.state == MainGameState.State.Tutorial);
         }
 
         void OnGameEventReceived(GameEvent gameEvent)
@@ -43,6 +49,7 @@ namespace GUI
             _chooseUi.gameObject.SetActive(isVisible);
             _startEndLevelUi.gameObject.SetActive(isVisible);
             _victoryUi.gameObject.SetActive(isVisible);
+            _tutorialUi.gameObject.SetActive(isVisible);
         }
 
         void SetVisibleUi(int uiIndex, bool isVisible)
@@ -53,6 +60,8 @@ namespace GUI
                 _startEndLevelUi.gameObject.SetActive(isVisible);
             else if (uiIndex == 2)
                 _victoryUi.gameObject.SetActive(isVisible);
+            else if (uiIndex == 3)
+                _tutorialUi.gameObject.SetActive(isVisible);
         }
 
         [ContextMenu("Start choose enemy")]
