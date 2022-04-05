@@ -38,6 +38,6 @@ public class PlayerAnimationController : MonoBehaviour
 
     void Update()
     {
-        _aimingCamera.Priority = _player.isHolding ? 20 : 0;
+        _aimingCamera.Priority = _player.isAiming ? 20 : 0;
     }
 }

@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
     [Inject(Optional = true)] LevelState _levelState;
 
     Camera _shotCamera;
-    // bool _hasShot;
 
     public Camera ShotCamera
     {
@@ -26,6 +25,7 @@ public class Player : MonoBehaviour
     }
 
     public bool isHolding { get; private set; }
+    public bool isAiming => isHolding && _levelState.CanFire;
 
     void Start()
     {
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
 
     void Reset()
     {
-        //   _hasShot = false;
+        isHolding = false;
         _shotCamera = null;
     }
 
@@ -59,7 +59,6 @@ public class Player : MonoBehaviour
             {
                 isHolding = false;
                 Shot();
-                //          _hasShot = true;
             }
         }
     }

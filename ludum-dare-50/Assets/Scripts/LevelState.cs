@@ -17,7 +17,7 @@ public class LevelState : MonoBehaviour
     bool _started = false;
     bool _playerHasShot = false;
 
-    public bool CanFire => _started && !_playerHasShot;
+    public bool CanFire => _started && !_gameOver && !_playerHasShot;
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class LevelState : MonoBehaviour
 
     void OnReceiveGameEvent(GameEvent gameEvent)
     {
-        if (!_gameOver && gameEvent.Is(GameEventType.PlayerShot))
+        if (CanFire && gameEvent.Is(GameEventType.PlayerShot))
         {
             OnPlayerShot(gameEvent);
         }
@@ -49,8 +49,6 @@ public class LevelState : MonoBehaviour
 
     void OnPlayerShot(GameEvent gameEvent)
     {
-        if (!_started)
-            return;
         _playerHasShot = true;
         var hitInfo = gameEvent.GetParam<Player.HitInfo>();
         if (hitInfo.HasHitEnemy)
