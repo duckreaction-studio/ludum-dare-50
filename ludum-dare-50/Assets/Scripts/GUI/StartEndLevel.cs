@@ -17,11 +17,13 @@ namespace GUI
         [SerializeField] float _showDuration = 3f;
 
         VisualElement _root;
+        Type _currentType;
         static string _scoreContainer = "center-container2";
 
         void Start()
         {
             _root = GetComponent<UIDocument>().rootVisualElement;
+            _root.Q<Button>("fullscreen-button").clicked += OnButtonClicked;
         }
 
         void OnEnable()
@@ -29,21 +31,29 @@ namespace GUI
             Start();
         }
 
+        void OnButtonClicked()
+        {
+            StopAllCoroutines();
+            Close();
+        }
+
         public void ShowEnemyName(string enemyName)
         {
+            _currentType = Type.showEnemy;
             SetScoreVisible(false);
             SetTitle("the", enemyName);
 
-            StartCoroutine(WaitAndSignalEndOfShowCoroutine(Type.showEnemy));
+            StartCoroutine(WaitAndSignalEndOfShowCoroutine());
         }
 
         public void ShowScore(Score score)
         {
+            _currentType = Type.showScore;
             SetScoreVisible(score.type != Score.Type.Fail);
             SetTitle("you", score.type == Score.Type.Fail ? "died" : "win");
             SetStarCount(_scoreContainer, score.StarCount);
             SetScoreTitle(score.type);
-            StartCoroutine(WaitAndSignalEndOfShowCoroutine(Type.showScore));
+            StartCoroutine(WaitAndSignalEndOfShowCoroutine());
         }
 
         void SetScoreTitle(Score.Type scoreType)
@@ -83,10 +93,15 @@ namespace GUI
                 _root.Q<GroupBox>(_scoreContainer).AddToClassList("hidden");
         }
 
-        IEnumerator WaitAndSignalEndOfShowCoroutine(Type type)
+        IEnumerator WaitAndSignalEndOfShowCoroutine()
         {
             yield return new WaitForSeconds(_showDuration);
-            GetComponentInParent<GameUIController>().EndShowTitle(type);
+            Close();
+        }
+
+        void Close()
+        {
+            GetComponentInParent<GameUIController>().EndShowTitle(_currentType);
         }
     }
 }
