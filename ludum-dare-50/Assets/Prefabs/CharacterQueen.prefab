@@ -1651,8 +1651,8 @@ MonoBehaviour:
   - c3
   _rangeStepBackward: {x: 7, y: 10}
   _rangeStepForward: {x: 7, y: 10}
-  _rangeMoveDuration: {x: 0.06, y: 0.25}
-  _rangeWaitDuration: {x: 0.3, y: 0.8}
+  _rangeMoveDuration: {x: 0.06, y: 0.17}
+  _rangeWaitDuration: {x: 0.1, y: 0.3}
   _trajectoryCount: 2
 --- !u!1001 &4209556835435571378
 PrefabInstance:

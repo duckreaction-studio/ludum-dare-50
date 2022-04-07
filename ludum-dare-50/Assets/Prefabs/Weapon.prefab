@@ -375,28 +375,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6791265361946696627, guid: 3208c6dda2ad74440b84b5ab17460108,
         type: 3}
-      propertyPath: m_MinVertexDistance
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 6791265361946696627, guid: 3208c6dda2ad74440b84b5ab17460108,
-        type: 3}
       propertyPath: m_Parameters.alignment
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6791265361946696627, guid: 3208c6dda2ad74440b84b5ab17460108,
         type: 3}
-      propertyPath: m_Parameters.numCapVertices
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6791265361946696627, guid: 3208c6dda2ad74440b84b5ab17460108,
-        type: 3}
       propertyPath: m_Parameters.widthMultiplier
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6791265361946696627, guid: 3208c6dda2ad74440b84b5ab17460108,
-        type: 3}
-      propertyPath: m_Parameters.numCornerVertices
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6791265361946696628, guid: 3208c6dda2ad74440b84b5ab17460108,
         type: 3}
